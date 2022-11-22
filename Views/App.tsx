@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Clock from 'react-live-clock';
+import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 import './style.css';
 
@@ -49,6 +50,19 @@ export default function App() {
       mid: '',
     });
   };
+
+  const populateTextAreaWithPrefilledOptions = () => {
+    console.log('Changed');
+  };
+
+  const options = prefilledResponses.map((value, index) => {
+    console.log(index, value);
+    return (
+      <option key={index} value="">
+        {value.option}
+      </option>
+    );
+  });
 
   return (
     <div>
@@ -152,6 +166,16 @@ export default function App() {
             <button>Submit</button>
           </div>
         </form>
+        <div className="controls-options">
+          <label>Prefilled Responses:</label>
+          <select
+            name="prefilled-options"
+            id="prefilled_options"
+            onChange={populateTextAreaWithPrefilledOptions}
+          >
+            {options}
+          </select>
+        </div>
         <div className="btn-controls">
           <button onClick={copyMIDToClipBoard}>Copy MID</button>
           <button onClick={clearMID}>Clear MID</button>

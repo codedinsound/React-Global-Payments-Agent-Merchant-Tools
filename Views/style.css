@@ -36,12 +36,22 @@ form {
   color: cyan;
 }
 
+/* Controls Field Styling ================================================= */
+
+.controls-options {
+  border: 1px solid white;
+  background-color: grey;
+  width: 35%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
 .controls-container {
   display: flex;
   justify-content: space-between;
 }
 
-/* Controls Field Styling ================================================= */
 .control {
   margin-bottom: 0.5rem;
   padding: 2px;
