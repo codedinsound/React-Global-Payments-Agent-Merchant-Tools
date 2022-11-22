@@ -12,8 +12,6 @@ export default function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
-    console.log(displayFields);
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\n Secondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason}`;
     navigator.clipboard.writeText(output);
     // Clean the Fields Update
@@ -22,8 +20,6 @@ export default function App() {
 
   const handleChange = (event) => {
     const field: string = event.target.id;
-
-    console.log(field);
 
     if (field === 'mid' && event.target.value.length >= 7) {
       updateClass('changeMIDColor');
