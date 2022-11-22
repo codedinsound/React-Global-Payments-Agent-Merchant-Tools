@@ -12,7 +12,7 @@ export default function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\n Secondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason}`;
+    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason}`;
     navigator.clipboard.writeText(output);
     // Clean the Fields Update
     updateDisplay(Utils.generateNewDisplayFieldObject());
