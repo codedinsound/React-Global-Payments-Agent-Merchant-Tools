@@ -41,9 +41,19 @@ form {
   justify-content: space-between;
 }
 
+/* Controls Field Styling ================================================= */
 .control {
   margin-bottom: 0.5rem;
   padding: 2px;
+}
+
+.control-radio-btns {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 75%;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .control label {

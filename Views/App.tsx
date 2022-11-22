@@ -12,7 +12,9 @@ export default function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nReason: ${displayFields.callerReason}`;
+
+    console.log(displayFields);
+    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\n Secondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason}`;
     navigator.clipboard.writeText(output);
     // Clean the Fields Update
     updateDisplay(Utils.generateNewDisplayFieldObject());
@@ -20,6 +22,8 @@ export default function App() {
 
   const handleChange = (event) => {
     const field: string = event.target.id;
+
+    console.log(field);
 
     if (field === 'mid' && event.target.value.length >= 7) {
       updateClass('changeMIDColor');
@@ -32,7 +36,6 @@ export default function App() {
     };
 
     newObj[field] = event.target.value;
-
     updateDisplay(newObj);
   };
 
@@ -61,11 +64,16 @@ export default function App() {
         <h3>DBA: {displayFields.dba}</h3>
         <h3>Caller Name: {displayFields.callerName}</h3>
         <h3>Caller Title: {displayFields.callerTitle}</h3>
+        <h3>SVG: {displayFields.svg}</h3>
         <h3>Reason for Call: {displayFields.callerReason}</h3>
         <div className="field-clock">
           <div>
             Time:{' '}
-            <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} />
+            <Clock
+              format={'HH:mm:ss'}
+              ticking={true}
+              timezone={'US/Mountain'}
+            />
           </div>
         </div>
       </div>
@@ -106,6 +114,32 @@ export default function App() {
               onChange={handleChange}
               value={displayFields.callerTitle}
             />
+          </div>
+          <div className="control-radio-btns">
+            <input
+              type="radio"
+              value="DBA Confirmed"
+              id="svg"
+              name="confirmation"
+              onChange={handleChange}
+            />{' '}
+            DBA Confirmed
+            <input
+              type="radio"
+              value="Bank Account"
+              name="confirmation"
+              id="svg"
+              onChange={handleChange}
+            />{' '}
+            Bank Account
+            <input
+              type="radio"
+              value="SSN"
+              id="svg"
+              name="confirmation"
+              onChange={handleChange}
+            />{' '}
+            SSN
           </div>
           <div className="control">
             <label htmlFor="new-password">Reason for the Call </label>
