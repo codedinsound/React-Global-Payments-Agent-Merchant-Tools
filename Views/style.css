@@ -47,7 +47,6 @@ form {
 /* Controls Field Styling ================================================= */
 
 .controls-options-container {
-  border: 1px solid white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -55,11 +54,16 @@ form {
 }
 
 .controls-links {
-  border: 1px solid white;
-  height: 15rem;
+  background-color: grey;
+  border-radius: 5px;
+  /* height: 15rem; */
 }
 
 .controls-links button {
+  margin: 1rem;
+}
+
+.controls-links label {
   margin: 1rem;
 }
 

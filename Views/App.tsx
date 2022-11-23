@@ -191,12 +191,20 @@ export default function App() {
             </select>
           </div>
           <div className="controls-links">
+            <label>Sites: </label>
             <a
               href="https://merchantcenter.transit-pass.com/jsp/vt/jsp/index.jsp"
               target="_blank"
               rel="noopener noreferrer"
             >
               <button>Merchant Center</button>
+            </a>
+            <a
+              href="https://www.mreports.com/sso/login?service=https%3A%2F%2Fwww.mreports.com%2Fportal%2Fstart%2Ftransfirst"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button>CBOSS</button>
             </a>
           </div>
         </div>
