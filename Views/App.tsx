@@ -51,14 +51,20 @@ export default function App() {
     });
   };
 
-  const populateTextAreaWithPrefilledOptions = () => {
-    console.log('Changed');
+  const populateTextAreaWithPrefilledOptions = (event) => {
+    const prefilledReason: string =
+      prefilledResponses[event.target.value].filled_reason;
+
+    updateDisplay({
+      ...displayFields,
+      callerReason: prefilledReason,
+    });
   };
 
   const options = prefilledResponses.map((value, index) => {
-    console.log(index, value);
+    // console.log(index, value);
     return (
-      <option key={index} value="">
+      <option key={index} value={index}>
         {value.option}
       </option>
     );
