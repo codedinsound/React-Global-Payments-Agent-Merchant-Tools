@@ -179,15 +179,26 @@ export default function App() {
             <button>Submit</button>
           </div>
         </form>
-        <div className="controls-options">
-          <label>Prefilled Responses:</label>
-          <select
-            name="prefilled-options"
-            id="prefilled_options"
-            onChange={populateTextAreaWithPrefilledOptions}
-          >
-            {options}
-          </select>
+        <div className="controls-options-container">
+          <div className="controls-options">
+            <label>Prefilled Responses:</label>
+            <select
+              name="prefilled-options"
+              id="prefilled_options"
+              onChange={populateTextAreaWithPrefilledOptions}
+            >
+              {options}
+            </select>
+          </div>
+          <div className="controls-links">
+            <a
+              href="https://merchantcenter.transit-pass.com/jsp/vt/jsp/index.jsp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button>Merchant Center</button>
+            </a>
+          </div>
         </div>
         <div className="btn-controls">
           <button onClick={copyMIDToClipBoard}>Copy MID</button>

@@ -46,10 +46,27 @@ form {
 
 /* Controls Field Styling ================================================= */
 
+.controls-options-container {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.controls-links {
+  border: 1px solid white;
+  height: 15rem;
+}
+
+.controls-links button {
+  margin: 1rem;
+}
+
 .controls-options {
   border-radius: 5px;
   background-color: grey;
-  width: 35%;
+  width: 90%;
   height: 5rem;
   display: flex;
   align-items: center;
