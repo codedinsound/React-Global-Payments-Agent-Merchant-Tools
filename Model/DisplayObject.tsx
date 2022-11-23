@@ -1,7 +1,7 @@
 interface DisplayObject {
   mid: string;
   dba: string;
-  svg: string;
+  sv: string;
   callerName: string;
   callerTitle: string;
   callerReason: string;

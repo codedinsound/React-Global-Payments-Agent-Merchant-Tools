@@ -21,6 +21,10 @@ const prefilledResponses = [
     filled_reason:
       'Terminal has a QD error duplicate batch. Helped merchant with deleting duplicate batch.',
   },
+  {
+    option: 'Transferred to GPI',
+    filled_reason: 'Transferred to GPI',
+  },
 ];
 
 export default prefilledResponses;

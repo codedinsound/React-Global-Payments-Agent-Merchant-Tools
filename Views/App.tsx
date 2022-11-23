@@ -87,7 +87,7 @@ export default function App() {
         <h3>Full Name: {displayFields.callerName}</h3>
         <h3>Title: {displayFields.callerTitle}</h3>
         <h3>DBA: {displayFields.dba}</h3>
-        <h3>SVG: {displayFields.svg}</h3>
+        <h3>SV: {displayFields.sv}</h3>
         <h3>Reason for Call: {displayFields.callerReason}</h3>
         <div className="field-clock">
           <div>
@@ -142,7 +142,7 @@ export default function App() {
             <input
               type="radio"
               value="DBA Confirmed"
-              id="svg"
+              id="sv"
               name="confirmation"
               onChange={handleChange}
             />{' '}
@@ -151,18 +151,26 @@ export default function App() {
               type="radio"
               value="Bank Account"
               name="confirmation"
-              id="svg"
+              id="sv"
               onChange={handleChange}
             />{' '}
             Bank Account
             <input
               type="radio"
               value="SSN"
-              id="svg"
+              id="sv"
               name="confirmation"
               onChange={handleChange}
             />{' '}
             SSN
+            <input
+              type="radio"
+              value="PSS ISO Confirmed"
+              id="sv"
+              name="confirmation"
+              onChange={handleChange}
+            />{' '}
+            ISO Confirmed
           </div>
           <div className="control">
             <label htmlFor="new-password">Reason for the Call </label>
