@@ -8,6 +8,14 @@ body {
   color: #fff;
 }
 
+.navigation {
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: end;
+  background-color: #38015c;
+}
+
 .top-display {
   border-bottom: 2px solid #fff;
   margin-bottom: 5px;
