@@ -5,7 +5,7 @@ class Utils {
     const obj: DisplayObject = {
       mid: '',
       dba: '',
-      svg: '',
+      sv: '',
       callerName: '',
       callerTitle: '',
       callerReason: '',
