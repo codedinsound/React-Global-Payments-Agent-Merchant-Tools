@@ -15,7 +15,6 @@ export default function App() {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason} - no FQA.`;
     navigator.clipboard.writeText(output);
-    // Clean the Fields Update
     updateDisplay(Utils.generateNewDisplayFieldObject());
   };
 
@@ -62,7 +61,6 @@ export default function App() {
   };
 
   const options = prefilledResponses.map((value, index) => {
-    // console.log(index, value);
     return (
       <option key={index} value={index}>
         {value.option}
@@ -81,9 +79,9 @@ export default function App() {
         <h3>
           MID: <span className={changeColor}>{displayFields.mid}</span>
         </h3>
+        <h3>Full Name: {displayFields.callerName}</h3>
+        <h3>Title: {displayFields.callerTitle}</h3>
         <h3>DBA: {displayFields.dba}</h3>
-        <h3>Caller Name: {displayFields.callerName}</h3>
-        <h3>Caller Title: {displayFields.callerTitle}</h3>
         <h3>SVG: {displayFields.svg}</h3>
         <h3>Reason for Call: {displayFields.callerReason}</h3>
         <div className="field-clock">
@@ -109,16 +107,7 @@ export default function App() {
             />
           </div>
           <div className="control">
-            <label htmlFor="caller-dba">DBA</label>
-            <input
-              type="text"
-              id="dba"
-              onChange={handleChange}
-              value={displayFields.dba}
-            />
-          </div>
-          <div className="control">
-            <label htmlFor="caller-full-name">Caller Full Name </label>
+            <label htmlFor="caller-full-name">Full Name </label>
             <input
               type="text"
               id="callerName"
@@ -127,12 +116,21 @@ export default function App() {
             />
           </div>
           <div className="control">
-            <label htmlFor="caller-title">Caller Title </label>
+            <label htmlFor="caller-title">Title </label>
             <input
               type="text"
               id="callerTitle"
               onChange={handleChange}
               value={displayFields.callerTitle}
+            />
+          </div>
+          <div className="control">
+            <label htmlFor="caller-dba">DBA</label>
+            <input
+              type="text"
+              id="dba"
+              onChange={handleChange}
+              value={displayFields.dba}
             />
           </div>
           <div className="control-radio-btns">

@@ -16,6 +16,11 @@ const prefilledResponses = [
     filled_reason:
       'Needs credit cards in order to do tip adjustments. For the date: ',
   },
+  {
+    option: 'Duplicate Batch',
+    filled_reason:
+      'Terminal has a QD error duplicate batch. Helped merchant with deleting duplicate batch.',
+  },
 ];
 
 export default prefilledResponses;
