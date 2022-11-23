@@ -7,6 +7,15 @@ const prefilledResponses = [
     option: 'Merchant Center Unlock',
     filled_reason: 'Needed to get unlocked from merchant center.',
   },
+  {
+    option: 'TXP Unlock',
+    filled_reason: 'Needed transaction express user unlock',
+  },
+  {
+    option: 'Credit Cards for Tip Adjust',
+    filled_reason:
+      'Needs credit cards in order to do tip adjustments. For the date: ',
+  },
 ];
 
 export default prefilledResponses;

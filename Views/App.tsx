@@ -13,7 +13,7 @@ export default function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason}`;
+    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason} - no FQA.`;
     navigator.clipboard.writeText(output);
     // Clean the Fields Update
     updateDisplay(Utils.generateNewDisplayFieldObject());
@@ -69,6 +69,10 @@ export default function App() {
       </option>
     );
   });
+
+  const copyDBAToClipboard = () => {
+    navigator.clipboard.writeText(displayFields.dba);
+  };
 
   return (
     <div>
@@ -184,6 +188,7 @@ export default function App() {
         </div>
         <div className="btn-controls">
           <button onClick={copyMIDToClipBoard}>Copy MID</button>
+          <button onClick={copyDBAToClipboard}>Copy DBA</button>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
         </div>
