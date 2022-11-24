@@ -6,18 +6,22 @@ import Utils from '../Utils';
 import './style.css';
 
 export default function App() {
+  const [merchantHistory, updateMerchantHistory] = useState([]);
   const [changeColor, updateClass] = useState('');
   const [displayFields, updateDisplay] = useState(
     Utils.generateNewDisplayFieldObject()
   );
 
-  console.log(localStorage.getItem(''));
+  // Work on this section of code to extract local storage.
+  // console.log(localStorage.getItem(''));
 
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
     navigator.clipboard.writeText(output);
     updateDisplay(Utils.generateNewDisplayFieldObject());
+    merchantHistory.push(displayFields);
+    updateMerchantHistory([...merchantHistory]);
   };
 
   const handleChange = (event) => {
@@ -66,6 +70,14 @@ export default function App() {
     return (
       <option key={index} value={index}>
         {value.option}
+      </option>
+    );
+  });
+
+  const historyOptions = merchantHistory.map((merchant, index) => {
+    return (
+      <option key={index} value={index}>
+        {merchant.mid + ' - ' + merchant.dba}
       </option>
     );
   });
@@ -194,7 +206,7 @@ export default function App() {
             <select
               name="prefilled-options"
               id="prefilled_options"
-              // onChange={populateTextAreaWithPrefilledOptions}
+              onChange={populateTextAreaWithPrefilledOptions}
             >
               {options}
             </select>
@@ -206,10 +218,10 @@ export default function App() {
               name="history_options"
               id="history_options"
               onChange={() => {
-                console.log('Hello');
+                // console.log('Hello');
               }}
             >
-              <option>34253599999 - Lasanga Pizza</option>
+              {historyOptions}
             </select>
           </div>
           <div className="controls-links">
