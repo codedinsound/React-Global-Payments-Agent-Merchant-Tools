@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Clock from 'react-live-clock';
+import { LocalStorageWorker } from '../Controller';
 import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 import './style.css';
@@ -14,6 +15,7 @@ export default function App() {
 
   // Work on this section of code to extract local storage.
   // console.log(localStorage.getItem(''));
+  LocalStorageWorker.load();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -22,6 +24,9 @@ export default function App() {
     updateDisplay(Utils.generateNewDisplayFieldObject());
     merchantHistory.push(displayFields);
     updateMerchantHistory([...merchantHistory]);
+
+    // Store Data into Local Storage
+    LocalStorageWorker.store(merchantHistory);
   };
 
   const handleChange = (event) => {
@@ -249,10 +254,7 @@ export default function App() {
           <button onClick={clearFields}>Clear All Fields</button>
           <button
             onClick={() => {
-              localStorage.setItem(
-                'test',
-                JSON.stringify({ option: 'dafdfadfadfadsfadgad' })
-              );
+              LocalStorageWorker.store(merchantHistory);
             }}
           >
             TEST STORAGE
