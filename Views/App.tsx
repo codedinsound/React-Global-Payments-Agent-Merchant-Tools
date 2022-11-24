@@ -11,11 +11,11 @@ export default function App() {
     Utils.generateNewDisplayFieldObject()
   );
 
-  console.log("loaded");
+  console.log('loaded');
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason} - no FQA.`;
+    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
     navigator.clipboard.writeText(output);
     updateDisplay(Utils.generateNewDisplayFieldObject());
   };

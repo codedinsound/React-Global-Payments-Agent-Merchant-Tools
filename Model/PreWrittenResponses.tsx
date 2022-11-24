@@ -8,6 +8,10 @@ const prefilledResponses = [
     filled_reason: 'Needed to get unlocked from merchant center.',
   },
   {
+    option: 'Translink Password Reset',
+    filled_reason: 'Helped merchant with reseting their translink account.',
+  },
+  {
     option: 'TXP Unlock',
     filled_reason: 'Needed transaction express user unlock',
   },
