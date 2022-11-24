@@ -11,6 +11,8 @@ export default function App() {
     Utils.generateNewDisplayFieldObject()
   );
 
+  console.log("loaded");
+
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.svg}\nReason: ${displayFields.callerReason} - no FQA.`;

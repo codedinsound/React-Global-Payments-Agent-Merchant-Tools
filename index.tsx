@@ -12,3 +12,5 @@ root.render(
     <App />
   </StrictMode>
 );
+
+// Disable Strict Mode if you want to prevent duplicate
