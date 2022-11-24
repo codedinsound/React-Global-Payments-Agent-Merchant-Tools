@@ -46,17 +46,33 @@ form {
 
 /* Controls Field Styling ================================================= */
 
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
 .controls-options-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+}
+
+.controls-options {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .controls-links {
   background-color: grey;
   border-radius: 5px;
-  /* height: 15rem; */
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .controls-links button {
@@ -65,21 +81,6 @@ form {
 
 .controls-links label {
   margin: 1rem;
-}
-
-.controls-options {
-  border-radius: 5px;
-  background-color: grey;
-  width: 90%;
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-}
-
-.controls-container {
-  display: flex;
-  justify-content: space-between;
 }
 
 .control {
