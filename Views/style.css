@@ -58,6 +58,9 @@ form {
   justify-content: space-between;
 }
 
+.controls-options-history {
+}
+
 .controls-options {
   display: flex;
   align-items: center;

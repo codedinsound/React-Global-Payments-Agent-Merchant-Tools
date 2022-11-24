@@ -11,7 +11,7 @@ export default function App() {
     Utils.generateNewDisplayFieldObject()
   );
 
-  console.log('loaded');
+  console.log(localStorage.getItem(''));
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -200,6 +200,7 @@ export default function App() {
               {options}
             </select>
           </div>
+          <div className="controls-options-history">Middle</div>
           <div className="controls-links">
             <label>Sites: </label>
             <a
@@ -223,6 +224,16 @@ export default function App() {
           <button onClick={copyDBAToClipboard}>Copy DBA</button>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
+          <button
+            onClick={() => {
+              localStorage.setItem(
+                'test',
+                JSON.stringify({ option: 'dafdfadfadfadsfadgad' })
+              );
+            }}
+          >
+            TEST STORAGE
+          </button>
         </div>
       </div>
       <section className="footer"></section>
