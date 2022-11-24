@@ -191,16 +191,27 @@ export default function App() {
         </form>
         <div className="controls-options-container">
           <div className="controls-options">
-            <label>Prefilled Responses:</label>
             <select
               name="prefilled-options"
               id="prefilled_options"
-              onChange={populateTextAreaWithPrefilledOptions}
+              // onChange={populateTextAreaWithPrefilledOptions}
             >
               {options}
             </select>
           </div>
-          <div className="controls-options-history">Middle</div>
+          <div className="controls-options-history">
+            {' '}
+            <select
+              size={10}
+              name="history_options"
+              id="history_options"
+              onChange={() => {
+                console.log('Hello');
+              }}
+            >
+              <option>34253599999 - Lasanga Pizza</option>
+            </select>
+          </div>
           <div className="controls-links">
             <label>Sites: </label>
             <a

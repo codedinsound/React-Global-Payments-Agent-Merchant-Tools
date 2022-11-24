@@ -46,19 +46,26 @@ form {
 
 /* Controls Field Styling ================================================= */
 
+.controls-options-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .controls-container {
   display: flex;
   justify-content: space-between;
   padding: 5px;
 }
 
-.controls-options-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.controls-options-history {
+  background-color: grey;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
 }
 
-.controls-options-history {
+.controls-options-history select {
+  width: 100%;
 }
 
 .controls-options {
