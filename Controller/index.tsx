@@ -11,4 +11,17 @@ class LocalStorageWorker {
   }
 }
 
+class SessionManagerWorker {
+  static login(): void {
+
+  }
+
+  static logout(): void {
+    
+  }
+}
+
+
+
+
 export { LocalStorageWorker };
