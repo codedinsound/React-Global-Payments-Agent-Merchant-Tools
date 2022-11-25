@@ -252,13 +252,6 @@ export default function App() {
           <button onClick={copyDBAToClipboard}>Copy DBA</button>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
-          <button
-            onClick={() => {
-              LocalStorageWorker.store(merchantHistory);
-            }}
-          >
-            TEST STORAGE
-          </button>
         </div>
       </div>
       <section className="footer"></section>
