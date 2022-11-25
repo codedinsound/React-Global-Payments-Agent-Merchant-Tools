@@ -1,21 +1,14 @@
+import { DisplayObject } from '../Model';
+
 class LocalStorageWorker {
-  static load(): any[] {
-    let items: any[] = [];
+  static load(): DisplayObject[] {
     const retrivedStorage: string = localStorage.getItem('history');
-
-    if (retrivedStorage !== null) items = [...JSON.parse(retrivedStorage)];
-
-    console.log(items);
-
-    return items;
+    return retrivedStorage !== null ? JSON.parse(retrivedStorage) : [];
   }
 
   static store(data: any[]): void {
-    console.log(data);
     localStorage.setItem('history', JSON.stringify(data));
   }
 }
-
-// static store() {}
 
 export { LocalStorageWorker };
