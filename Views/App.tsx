@@ -7,15 +7,13 @@ import Utils from '../Utils';
 import './style.css';
 
 export default function App() {
-  const [merchantHistory, updateMerchantHistory] = useState([]);
+  const [merchantHistory, updateMerchantHistory] = useState(
+    LocalStorageWorker.load()
+  );
   const [changeColor, updateClass] = useState('');
   const [displayFields, updateDisplay] = useState(
     Utils.generateNewDisplayFieldObject()
   );
-
-  // Work on this section of code to extract local storage.
-  // console.log(localStorage.getItem(''));
-  LocalStorageWorker.load();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -222,8 +220,9 @@ export default function App() {
               size={10}
               name="history_options"
               id="history_options"
-              onChange={() => {
-                // console.log('Hello');
+              onChange={(event) => {
+                const field = event.target.value;
+                updateDisplay(merchantHistory[field]);
               }}
             >
               {historyOptions}
