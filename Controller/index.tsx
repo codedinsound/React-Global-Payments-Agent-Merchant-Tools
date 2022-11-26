@@ -1,4 +1,5 @@
 import { DisplayObject } from '../Model';
+import { AES, enc } from 'crypto-js';
 
 class LocalStorageWorker {
   static load(): DisplayObject[] {
@@ -14,6 +15,15 @@ class LocalStorageWorker {
 class SessionManagerWorker {
   static login(payload): void {
     console.log(payload);
+
+    const encrypted = AES.encrypt(
+      payload.username,
+      payload.password
+    ).toString();
+
+    console.log(encrypted);
+
+    // const bytes = AES.decrypt(cipher, payload.password);
   }
 
   static isLoggedIn(): void {}
