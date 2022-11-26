@@ -12,7 +12,9 @@ class LocalStorageWorker {
 }
 
 class SessionManagerWorker {
-  static login(): void {}
+  static login(payload): void {
+    console.log(payload);
+  }
 
   static isLoggedIn(): void {}
 

@@ -19,11 +19,11 @@ const LoginForm = (props) => {
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input type="text" />
+          <input type="text" id="username" />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input type="password" />
+          <input type="password" id="password" />
         </div>
         <div className="login-fields-button">
           <button>Log In</button>
