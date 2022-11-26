@@ -250,6 +250,25 @@ const MainToolsView = () => {
           <button onClick={copyDBAToClipboard}>Copy DBA</button>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
+          <button
+            onClick={() => {
+              let url = 'https://gp-broomfield-neo-server.codedsound.repl.co';
+
+              fetch(url)
+                .then((response) => {
+                  // handle the response
+                  return response.json();
+                })
+                .then((data) => {
+                  console.log(data);
+                })
+                .catch((error) => {
+                  // handle the error
+                });
+            }}
+          >
+            Test API Call
+          </button>
         </div>
       </div>
       <section className="footer"></section>
