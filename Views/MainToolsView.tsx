@@ -252,21 +252,20 @@ const MainToolsView = () => {
           <button onClick={clearFields}>Clear All Fields</button>
           <button
             onClick={() => {
-              let url =
-                'https://gp-broomfield-neo-server.codedsound.repl.co/loginin';
-
-              fetch(url)
-                .then((response) => {
-                  // handle the response
-                  return response.json();
-                })
-                .then((data) => {
-                  console.log(data);
-                })
-                .catch((error) => {
-                  // handle the error
-                  console.log(error);
-                });
+              // let url =
+              //   'https://gp-broomfield-neo-server.codedsound.repl.co/loginin';
+              // fetch(url)
+              //   .then((response) => {
+              //     // handle the response
+              //     return response.json();
+              //   })
+              //   .then((data) => {
+              //     console.log(data);
+              //   })
+              //   .catch((error) => {
+              //     // handle the error
+              //     console.log(error);
+              //   });
             }}
           >
             Test API Call
