@@ -12,16 +12,11 @@ class LocalStorageWorker {
 }
 
 class SessionManagerWorker {
-  static login(): void {
+  static login(): void {}
 
-  }
+  static isLoggedIn(): void {}
 
-  static logout(): void {
-    
-  }
+  static logout(): void {}
 }
-
-
-
 
 export { LocalStorageWorker };
