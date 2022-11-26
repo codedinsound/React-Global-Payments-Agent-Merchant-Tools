@@ -1,5 +1,4 @@
 import { DisplayObject } from '../Model';
-import { encrypt, decrypt } from 'react-crypt-gsm';
 
 class LocalStorageWorker {
   static load(): DisplayObject[] {
@@ -15,14 +14,6 @@ class LocalStorageWorker {
 class SessionManagerWorker {
   static login(payload): void {
     console.log(payload);
-
-    payload.username = encrypt(payload.username).content;
-    payload.password = encrypt(payload.password);
-    const decoder = new TextDecoder();
-
-    let pass = payload.password;
-
-    console.log(decrypt(pass));
   }
 
   static isLoggedIn(): void {}
