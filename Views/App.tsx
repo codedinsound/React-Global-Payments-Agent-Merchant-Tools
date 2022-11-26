@@ -7,6 +7,8 @@ import MainToolsView from '../Views/MainToolsView';
 import './style.css';
 
 export default function App() {
+  const [tokenization, updateToken] = useState({});
+
   let token = false;
   let display;
 

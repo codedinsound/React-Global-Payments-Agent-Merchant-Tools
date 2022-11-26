@@ -19,4 +19,4 @@ class SessionManagerWorker {
   static logout(): void {}
 }
 
-export { LocalStorageWorker };
+export { LocalStorageWorker, SessionManagerWorker };

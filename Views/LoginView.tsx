@@ -1,20 +1,32 @@
 import React from 'react';
+import { SessionManagerWorker } from '../Controller';
 
 const LoginForm = (props) => {
+  const loginHandler = (event) => {
+    event.preventDefault();
+
+    const [username, password] = event.target;
+
+    SessionManagerWorker.login({
+      username: username.value,
+      password: password.value,
+    });
+  };
+
   return (
     <div className="login-container">
-      <form>
+      <form onSubmit={loginHandler}>
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input />
+          <input type="text" />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input />
+          <input type="password" />
         </div>
         <div className="login-fields-button">
-          <button>Submit</button>
+          <button>Log In</button>
         </div>
       </form>
     </div>
