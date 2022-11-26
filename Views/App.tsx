@@ -9,7 +9,7 @@ import './style.css';
 export default function App() {
   const [tokenization, updateToken] = useState({});
 
-  let token = true;
+  let token = false;
   let display;
 
   if (!token) {

@@ -23,6 +23,14 @@ class SessionManagerWorker {
 
     console.log(encrypted);
 
+    fetch('https://gp-broomfield-neo-server.codedsound.repl.co/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data: '' }),
+    });
+
     // const bytes = AES.decrypt(cipher, payload.password);
   }
 

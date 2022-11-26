@@ -252,7 +252,8 @@ const MainToolsView = () => {
           <button onClick={clearFields}>Clear All Fields</button>
           <button
             onClick={() => {
-              let url = 'https://gp-broomfield-neo-server.codedsound.repl.co';
+              let url =
+                'https://gp-broomfield-neo-server.codedsound.repl.co/loginin';
 
               fetch(url)
                 .then((response) => {
@@ -264,6 +265,7 @@ const MainToolsView = () => {
                 })
                 .catch((error) => {
                   // handle the error
+                  console.log(error);
                 });
             }}
           >
