@@ -46,7 +46,6 @@ form {
 
 /* ====================================================================== */
 .login-container {
-  border: 1px solid white;
   height: 90vh;
   display: flex;
   justify-content: center;
