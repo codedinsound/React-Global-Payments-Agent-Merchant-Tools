@@ -1,7 +1,7 @@
 const prefilledResponses = [
   {
     option: 'Merchant Center Reset',
-    filled_reason: 'Needed merchant user credentials reset.',
+    filled_reason: 'Needed merchant user credentials reset for user: ',
   },
   {
     option: 'Merchant Center Unlock',
@@ -19,6 +19,11 @@ const prefilledResponses = [
     option: 'Credit Cards for Tip Adjust',
     filled_reason:
       'Needs credit cards in order to do tip adjustments. For the date: ',
+  },
+  {
+    option: 'Credit Cards for Transaction Adjust',
+    filled_reason:
+      'Merchant needed credit cards for transaction adjustment for the dates: ',
   },
   {
     option: 'Duplicate Batch',
