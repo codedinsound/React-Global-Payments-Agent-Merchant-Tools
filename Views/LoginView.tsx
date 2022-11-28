@@ -7,10 +7,10 @@ const LoginForm = (props) => {
 
     const [username, password] = event.target;
 
-    SessionManagerWorker.login({
-      username: username.value,
-      password: password.value,
-    });
+    // SessionManagerWorker.login({
+    //   username: username.value,
+    //   password: password.value,
+    // });
   };
 
   return (
