@@ -15,14 +15,23 @@ const Protected = ({ isLoggedIn, children }) => {
 export default function App() {
   const [tokenization, updateToken] = useState(null);
 
+  const loginIntoToolsHandler = (e) => {
+    e.preventDefault();
+
+    const [username, password] = e.target;
+    console.log('Fired', username.value, password.value);
+  };
+
   let token = true;
-  let display;
 
   return (
     <React.Fragment>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginForm />} />
+          <Route
+            path="/"
+            element={<LoginForm loginHandler={loginIntoToolsHandler} />}
+          />
           <Route
             path="/tools"
             element={
