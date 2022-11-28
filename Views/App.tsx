@@ -12,7 +12,7 @@ const Protected = ({ isLoggedIn, children }) => {
   return children;
 };
 
-export default function App() {
+export default function App(props) {
   const [tokenization, updateToken] = useState(null);
 
   const loginIntoToolsHandler = (e): void => {
@@ -28,7 +28,12 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<LoginForm loginHandler={loginIntoToolsHandler} />}
+            element={
+              <LoginForm
+                loginHandler={loginIntoToolsHandler}
+                sessionManager={props.sessionManager}
+              />
+            }
           />
           <Route
             path="/tools"

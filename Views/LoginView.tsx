@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SessionManagerWorker } from '../Controller';
+import { SessionManager } from '../Controller';
 
 const LoginForm = (props) => {
   const navigate = useNavigate();
@@ -15,7 +15,10 @@ const LoginForm = (props) => {
   const registerNewAgent = (e) => {
     e.preventDefault();
 
-    console.log('register');
+    const testUser = {
+      username: 'lsantander.ntl',
+      password: '123456A',
+    };
   };
 
   return (

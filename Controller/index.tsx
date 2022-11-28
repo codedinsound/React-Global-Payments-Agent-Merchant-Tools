@@ -50,10 +50,28 @@ class SessionManagerWorker {
 
     // const bytes = AES.decrypt(cipher, payload.password);
   }
-
-  static isLoggedIn(): void {}
-
-  static logout(): void {}
 }
 
-export { LocalStorageWorker, SessionManagerWorker };
+interface Session {
+  register(credentials);
+}
+
+class LocalSessionWorker implements Session {
+  register(credentials) {
+    console.log('local register');
+  }
+}
+
+class SessionManager {
+  private localSessionWorker: LocalSessionWorker;
+
+  constructor() {
+    this.localSessionWorker = new LocalSessionWorker();
+  }
+
+  localSessionRegister(credentals): void {
+    this.localSessionWorker.register(credentals);
+  }
+}
+
+export { LocalStorageWorker, SessionManager };
