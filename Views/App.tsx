@@ -7,23 +7,30 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './style.css';
 
+const Protected = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) return <LoginForm />;
+  return <MainToolsView />;
+};
+
 export default function App() {
-  const [tokenization, updateToken] = useState({});
+  const [tokenization, updateToken] = useState(null);
 
   let token = true;
   let display;
-
-  if (!token) {
-    display = <LoginForm />;
-  } else {
-    display = <MainToolsView />;
-  }
 
   return (
     <React.Fragment>
       <Router>
         <Routes>
-          <Route path="/" element={<MainToolsView />} />
+          <Route path="/" element={<LoginForm />} />
+          <Route
+            path="/tools"
+            element={
+              <Protected isLoggedIn={token}>
+                <MainToolsView />
+              </Protected>
+            }
+          />
         </Routes>
       </Router>
     </React.Fragment>
