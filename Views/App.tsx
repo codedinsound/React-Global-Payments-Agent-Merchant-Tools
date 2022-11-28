@@ -9,15 +9,13 @@ import './style.css';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <LoginForm />;
-  return <MainToolsView />;
+  return children;
 };
 
 export default function App() {
   const [tokenization, updateToken] = useState(null);
 
-  const loginIntoToolsHandler = (e) => {
-    e.preventDefault();
-
+  const loginIntoToolsHandler = (e): void => {
     const [username, password] = e.target;
     console.log('Fired', username.value, password.value);
   };

@@ -1,10 +1,26 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SessionManagerWorker } from '../Controller';
 
 const LoginForm = (props) => {
+  const navigate = useNavigate();
+
+  const handleSumbission = (e) => {
+    e.preventDefault();
+    props.loginHandler(e);
+
+    navigate('/tools');
+  };
+
+  const registerNewAgent = (e) => {
+    e.preventDefault();
+
+    console.log('register');
+  };
+
   return (
     <div className="login-container">
-      <form onSubmit={props.loginHandler}>
+      <form onSubmit={handleSumbission}>
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
@@ -18,6 +34,7 @@ const LoginForm = (props) => {
           <button>Log In</button>
         </div>
       </form>
+      <button onClick={registerNewAgent}>Register</button>
     </div>
   );
 };
