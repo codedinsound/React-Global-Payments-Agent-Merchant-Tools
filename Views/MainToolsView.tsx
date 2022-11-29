@@ -87,7 +87,6 @@ const MainToolsView = (props) => {
   };
 
   const handleLoggingOut = () => {
-    console.log('fire');
     props.logOut();
   };
 

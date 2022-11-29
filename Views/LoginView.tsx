@@ -23,11 +23,11 @@ const LoginForm = (props) => {
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input type="text" id="username" value={'lsantander.ntl'} readOnly />
+          <input type="text" id="username" value={'test'} readOnly />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input type="password" id="password" value={'123456A'} readOnly />
+          <input type="password" id="password" value={'test'} readOnly />
         </div>
         <div className="login-fields-button">
           <button>Log In</button>

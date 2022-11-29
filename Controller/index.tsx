@@ -46,6 +46,11 @@ class LocalSessionWorker implements Session {
 
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
+    if (!master.usersList[getUsernameHashValue]) {
+      console.log('user not found....');
+      return false;
+    }
+
     const val = AES.decrypt(
       master.usersList[getUsernameHashValue].p,
       credentials.password
