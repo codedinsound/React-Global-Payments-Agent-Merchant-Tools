@@ -36,7 +36,7 @@ export default function App(props) {
 
     const val = props.sessionManager.localSessionAuthenticate(credentials);
 
-    // NOTE: Refactor Later
+    // NOTE: Refactor Later if user is not properly authenticated then return false statement
     if (!val) return false;
 
     updateToken({
