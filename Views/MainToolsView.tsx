@@ -5,10 +5,8 @@ import { LocalStorageWorker } from '../Controller';
 import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
-const MainToolsView = () => {
-  const [merchantHistory, updateMerchantHistory] = useState(
-    LocalStorageWorker.load()
-  );
+const MainToolsView = (props) => {
+  const [merchantHistory, updateMerchantHistory] = useState(props.callHistory);
   const [changeColor, updateClass] = useState('');
   const [displayFields, updateDisplay] = useState(
     Utils.generateNewDisplayFieldObject()

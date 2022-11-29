@@ -40,9 +40,9 @@ export default function App(props) {
     return true;
   };
 
-  console.log(tokenization);
+  let isLoggedIn = tokenization ? tokenization.loggedIn : false;
 
-  let token = true;
+  console.log(tokenization);
 
   return (
     <React.Fragment>
@@ -60,8 +60,10 @@ export default function App(props) {
           <Route
             path="/tools"
             element={
-              <Protected isLoggedIn={token}>
-                <MainToolsView />
+              <Protected isLoggedIn={isLoggedIn}>
+                <MainToolsView
+                  callHistory={isLoggedIn ? tokenization.callHistory : null}
+                />
               </Protected>
             }
           />

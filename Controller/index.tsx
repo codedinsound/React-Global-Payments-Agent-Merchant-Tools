@@ -68,7 +68,6 @@ interface Credentials {
 class LocalSessionWorker implements Session {
   // Auth
   authenticate(credentials: Credentials) {
-    console.log('local: ', credentials);
     const master = {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
@@ -85,7 +84,6 @@ class LocalSessionWorker implements Session {
     // This Section of Code Generates a temporary token with all the users
     if (val === credentials.password) {
       userCallHistory = master.usersList[getUsernameHashValue].tch;
-
       return userCallHistory;
     }
 

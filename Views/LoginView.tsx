@@ -10,11 +10,11 @@ const LoginForm = (props) => {
 
     const navigateNext = props.loginHandler(e);
 
-    if (navigateNext) {
-      navigate('/tools');
-    } else {
-      navigate('/');
-    }
+    // if (navigateNext) {
+    //   navigate('/tools');
+    // } else {
+    //   navigate('/');
+    // }
   };
 
   return (
