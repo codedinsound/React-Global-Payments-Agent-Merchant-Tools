@@ -1,7 +1,4 @@
-import * as React from '
-static debug2(credentials: Credentials) {
-throw new Error('Method not implemented.');
-}react';
+import * as React from 'react';
 import { useState } from 'react';
 import LoginForm from '../Views/LoginView';
 import MainToolsView from '../Views/MainToolsView';
