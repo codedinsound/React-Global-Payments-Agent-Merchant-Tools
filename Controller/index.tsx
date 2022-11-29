@@ -81,8 +81,6 @@ class LocalSessionWorker implements Session {
     const hash = SHA1(credentials.username).toString();
     credentials.username = hash;
 
-    console.log(credentials);
-
     const users = JSON.parse(localStorage.getItem('users'));
 
     users[credentials.username] = {
