@@ -30,6 +30,16 @@ interface Credentials {
   password: string;
 }
 
+class ActiveSessionManager {
+  static createNewActiveSession() {}
+
+  static reestablisActiveSession() {}
+
+  static sessionTimeout() {}
+
+  static checkForActiveSessions() {}
+}
+
 // For Simulating a Database Using Local Storage Actual Authentication Goes
 // Deeper than that with utilizing a server and database respectively.
 class LocalSessionWorker implements Session {

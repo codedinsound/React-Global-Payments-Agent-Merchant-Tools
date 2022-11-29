@@ -36,6 +36,8 @@ export default function App(props) {
 
     const val = props.sessionManager.localSessionAuthenticate(credentials);
 
+    console.log(val);
+
     // NOTE: Refactor Later if user is not properly authenticated then return false statement
     if (!val) return false;
 
@@ -48,6 +50,7 @@ export default function App(props) {
     return true;
   };
 
+  // MARK: Log Out of the Screen
   const logOutOfToolsHandler = (e) => {
     updateToken(null);
   };
