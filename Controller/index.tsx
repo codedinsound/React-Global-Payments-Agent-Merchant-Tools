@@ -9,8 +9,6 @@ class LocalStorageWorker {
   }
 
   static store(data): void {
-    console.log(data);
-    // localStorage.setItem('history', JSON.stringify(data));
     let retrivedStorage = JSON.parse(localStorage.getItem('users'));
 
     console.log('past', data);
@@ -42,8 +40,6 @@ class LocalSessionWorker implements Session {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
 
-    console.log(master);
-
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
     if (!master.usersList[getUsernameHashValue]) {
@@ -67,9 +63,10 @@ class LocalSessionWorker implements Session {
       };
     }
 
+    console.log('Wrong Password');
     delete master.usersList;
 
-    return null;
+    return false;
   }
   register(credentials: Credentials) {
     console.log(credentials);
