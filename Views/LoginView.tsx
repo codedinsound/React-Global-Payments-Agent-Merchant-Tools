@@ -1,19 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DebuggingManager } from '../Testing';
 
 const LoginForm = (props) => {
+  DebuggingManager.debug(LoginForm.name, 6, [props]);
+
   const navigate = useNavigate();
 
   const handleSumbission = (e) => {
     e.preventDefault();
 
-    const navigateNext = props.loginHandler(e);
+    DebuggingManager.debug(handleSumbission.name, 11, [
+      e.target.username.value,
+      e.target.password.value,
+    ]);
 
-    if (navigateNext) {
-      navigate('/tools');
-    } else {
-      navigate('/');
-    }
+    const navigateNext = props.loginIntoToolsHandler(e);
+
+    // if (navigateNext) {
+    //   navigate('/tools');
+    // } else {
+    //   navigate('/');
+    // }
   };
 
   return (

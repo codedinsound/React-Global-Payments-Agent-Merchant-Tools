@@ -1,4 +1,7 @@
-import * as React from 'react';
+import * as React from '
+static debug2(credentials: Credentials) {
+throw new Error('Method not implemented.');
+}react';
 import { useState } from 'react';
 import LoginForm from '../Views/LoginView';
 import MainToolsView from '../Views/MainToolsView';
@@ -11,6 +14,7 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
+import { DebuggingManager } from '../Testing';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <Navigate to="/" replace />;
@@ -27,27 +31,33 @@ export default function App(props) {
 
   const loginIntoToolsHandler = (e) => {
     const [username, password] = e.target;
-    console.log('Fired', username.value, password.value);
 
-    const credentials: Credentials = {
-      username: username.value,
-      password: password.value,
-    };
+    DebuggingManager.debug(logOutOfToolsHandler.name, 33, [
+      username.value,
+      password.value,
+    ]);
 
-    const val = props.sessionManager.localSessionAuthenticate(credentials);
+    // const credentials: Credentials = {
+    //   username: username.value,
+    //   password: password.value,
+    // };
 
-    console.log(val);
+    // DebuggingManager.debug2(credentials)
 
-    // NOTE: Refactor Later if user is not properly authenticated then return false statement
-    if (!val) return false;
+    // const val = props.sessionManager.localSessionAuthenticate(credentials);
 
-    updateToken({
-      loggedIn: true,
-      user: val.user,
-      callHistory: val.userCallHistory,
-    });
+    // console.log(val);
 
-    return true;
+    // // NOTE: Refactor Later if user is not properly authenticated then return false statement
+    // if (!val) return false;
+
+    // updateToken({
+    //   loggedIn: true,
+    //   user: val.user,
+    //   callHistory: val.userCallHistory,
+    // });
+
+    // return true;
   };
 
   // MARK: Log Out of the Screen
@@ -65,7 +75,7 @@ export default function App(props) {
             path="/"
             element={
               <LoginForm
-                loginHandler={loginIntoToolsHandler}
+                loginIntoToolsHandler={loginIntoToolsHandler}
                 sessionManager={props.sessionManager}
               />
             }
