@@ -1,6 +1,5 @@
 import { DisplayObject } from '../Model';
 import { SHA1, AES, enc } from 'crypto-js';
-import { useReducer } from 'react';
 
 class LocalStorageWorker {
   static load(): DisplayObject[] {
@@ -31,9 +30,15 @@ interface Credentials {
 }
 
 class ActiveSessionManager {
-  static createNewActiveSession() {}
+  static createNewActiveSession(sessionParams) {
+    console.log('Creating new Session with Params', sessionParams);
+
+    // TODO: CREATE LOGIC FOR CREATING A LIVE SESSION IN LOCAL STORAGE
+  }
 
   static reestablisActiveSession() {}
+
+  static endSession() {}
 
   static sessionTimeout() {}
 
@@ -45,34 +50,50 @@ class ActiveSessionManager {
 class LocalSessionWorker implements Session {
   // Auth
   authenticate(credentials: Credentials) {
+    let userCallHistory;
+
     const master = {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
 
+    console.log('Gets the entire local database of users...');
     console.log(master);
 
-    // const getUsernameHashValue = SHA1(credentials.username).toString();
+    const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    // if (!master.usersList[getUsernameHashValue]) {
-    //   console.log('user not found....');
-    //   return false;
-    // }
+    if (!master.usersList[getUsernameHashValue]) {
+      console.log('user not found....');
+      return false;
+    }
 
-    // const val = AES.decrypt(
-    //   master.usersList[getUsernameHashValue].p,
-    //   credentials.password
-    // ).toString(enc.Utf8);
+    // Compares the password provided with the one from local database
+    const val = AES.decrypt(
+      master.usersList[getUsernameHashValue].p,
+      credentials.password
+    ).toString(enc.Utf8);
 
-    // let userCallHistory;
+    // This Section of Code Generates a temporary token with all the users
+    if (val === credentials.password) {
+      userCallHistory = master.usersList[getUsernameHashValue].tch;
 
-    // // This Section of Code Generates a temporary token with all the users
-    // if (val === credentials.password) {
-    //   userCallHistory = master.usersList[getUsernameHashValue].tch;
-    //   return {
-    //     user: getUsernameHashValue,
-    //     userCallHistory,
-    //   };
-    // }
+      console.log(userCallHistory);
+
+      // Create an active live session
+      console.log(credentials.username);
+
+      const sessionParams = {
+        isSessionAlive: true,
+        userHash: getUsernameHashValue,
+        userName: credentials.username,
+        userCallHistory,
+      };
+
+      ActiveSessionManager.createNewActiveSession(sessionParams);
+      // return {
+      //   user: getUsernameHashValue,
+      //   userCallHistory,
+      // };
+    }
 
     // console.log('Wrong Password');
     // delete master.usersList;

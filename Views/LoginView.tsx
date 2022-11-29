@@ -1,10 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DebuggingManager } from '../Testing';
 
 const LoginForm = (props) => {
-  DebuggingManager.debug(LoginForm.name, 6, [props]);
-
   const navigate = useNavigate();
 
   const handleSumbission = (e) => {
@@ -12,12 +9,13 @@ const LoginForm = (props) => {
 
     const navigateNext = props.loginIntoToolsHandler(e);
 
-    if (navigateNext) {
-      navigate('/tools');
-    } else {
-      navigate('/');
-    }
+    // if (navigateNext) {
+    //   navigate('/tools');
+    // } else {
+    //   navigate('/');
+    // }
   };
+
 
   return (
     <div className="login-container">
