@@ -6,7 +6,6 @@ import MainToolsView from '../Views/MainToolsView';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './style.css';
-import { SessionManager } from '../Controller';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <LoginForm />;
