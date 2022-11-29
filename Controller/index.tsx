@@ -68,6 +68,7 @@ interface Credentials {
 class LocalSessionWorker implements Session {
   // Auth
   authenticate(credentials: Credentials) {
+    console.log('local: ', credentials);
     const master = {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
@@ -80,8 +81,6 @@ class LocalSessionWorker implements Session {
     ).toString(enc.Utf8);
 
     let userCallHistory;
-
-    console.log(userCallHistory);
 
     // This Section of Code Generates a temporary token with all the users
     if (val === credentials.password) {
@@ -151,13 +150,12 @@ class SessionManager {
     this.localSessionWorker = new LocalSessionWorker();
   }
 
-  localSessionRegister(credentals): void {
+  public localSessionRegister(credentals): void {
     this.localSessionWorker.register(credentals);
   }
 
-  localSessionAuthenticate(credentials): boolean {
-    this.localSessionWorker.authenticate(credentials);
-    return true;
+  public localSessionAuthenticate(credentials) {
+    return this.localSessionWorker.authenticate(credentials);
   }
 }
 

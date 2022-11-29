@@ -7,20 +7,14 @@ const LoginForm = (props) => {
 
   const handleSumbission = (e) => {
     e.preventDefault();
-    props.loginHandler(e);
 
-    navigate('/tools');
-  };
+    const navigateNext = props.loginHandler(e);
 
-  const registerNewAgent = (e) => {
-    e.preventDefault();
-
-    const testUser = {
-      username: 'lsantander.ntl',
-      password: '123456A',
-    };
-
-    props.sessionManager.localSessionRegister(testUser);
+    if (navigateNext) {
+      navigate('/tools');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -29,17 +23,16 @@ const LoginForm = (props) => {
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input type="text" id="username" />
+          <input type="text" id="username" value={'lsantander.ntl'} readOnly />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input type="password" id="password" />
+          <input type="password" id="password" value={'123456A'} readOnly />
         </div>
         <div className="login-fields-button">
           <button>Log In</button>
         </div>
       </form>
-      <button onClick={registerNewAgent}>Register</button>
     </div>
   );
 };
