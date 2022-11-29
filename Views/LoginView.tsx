@@ -10,11 +10,11 @@ const LoginForm = (props) => {
 
     const navigateNext = props.loginHandler(e);
 
-    // if (navigateNext) {
-    //   navigate('/tools');
-    // } else {
-    //   navigate('/');
-    // }
+    if (navigateNext) {
+      navigate('/tools');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -33,6 +33,21 @@ const LoginForm = (props) => {
           <button>Log In</button>
         </div>
       </form>
+
+      <button
+        onClick={() => {
+          console.log('Register');
+
+          console.log(
+            props.sessionManager.localSessionRegister({
+              username: 'lsantander.ntl',
+              password: '123456A',
+            })
+          );
+        }}
+      >
+        Register
+      </button>
     </div>
   );
 };

@@ -8,48 +8,18 @@ class LocalStorageWorker {
     return retrivedStorage !== null ? JSON.parse(retrivedStorage) : [];
   }
 
-  static store(data: any[]): void {
-    localStorage.setItem('history', JSON.stringify(data));
-  }
-}
-
-async function getClientIPAddress() {
-  const res = await fetch('https://geolocation-db.com/json/');
-  const data = await res.json();
-
-  return data.IPv4;
-}
-
-class SessionManagerWorker {
-  static async login(data) {
+  static store(data): void {
     console.log(data);
+    // localStorage.setItem('history', JSON.stringify(data));
+    let retrivedStorage = JSON.parse(localStorage.getItem('users'));
 
-    let IPv4: string = await getClientIPAddress();
+    console.log('past', data);
+    retrivedStorage[data.user].tch = data.merchantHistory;
 
-    const encryptedPassword = AES.encrypt(
-      data.username, // Message
-      data.password // Key
-    ).toString();
+    // Update Local Storage
+    retrivedStorage = JSON.stringify(retrivedStorage);
 
-    console.log(encryptedPassword);
-
-    const payload = {
-      IPv4,
-      username: data.username,
-      password: encryptedPassword,
-    };
-
-    console.log(payload);
-
-    fetch('https://gp-broomfield-neo-server.codedsound.repl.co/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    // const bytes = AES.decrypt(cipher, payload.password);
+    localStorage.setItem('users', retrivedStorage);
   }
 }
 
@@ -72,72 +42,54 @@ class LocalSessionWorker implements Session {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
 
-    const getUsernameHashValue = SHA1(credentials.username).toString();
+    console.log(master);
 
-    const val = AES.decrypt(
-      master.usersList[getUsernameHashValue].p,
-      credentials.password
-    ).toString(enc.Utf8);
+    // const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    let userCallHistory;
+    // const val = AES.decrypt(
+    //   master.usersList[getUsernameHashValue].p,
+    //   credentials.password
+    // ).toString(enc.Utf8);
 
-    // This Section of Code Generates a temporary token with all the users
-    if (val === credentials.password) {
-      userCallHistory = master.usersList[getUsernameHashValue].tch;
-      return userCallHistory;
-    }
+    // let userCallHistory;
 
-    delete master.usersList;
+    // // This Section of Code Generates a temporary token with all the users
+    // if (val === credentials.password) {
+    //   userCallHistory = master.usersList[getUsernameHashValue].tch;
+    //   return {
+    //     user: getUsernameHashValue,
+    //     userCallHistory,
+    //   };
+    // }
+
+    // delete master.usersList;
 
     return null;
   }
   register(credentials: Credentials) {
     console.log(credentials);
 
-    // credentials.username = AES.encrypt(
-    //   credentials.username,
-    //   credentials.username
-    // ).toString();
+    const compared = credentials.password;
 
-    // const compared = credentials.password;
+    credentials.password = AES.encrypt(
+      credentials.password,
+      credentials.password
+    ).toString();
 
-    // credentials.password = AES.encrypt(
-    //   credentials.password,
-    //   credentials.password
-    // ).toString();
+    const hash = SHA1(credentials.username).toString();
+    credentials.username = hash;
 
-    // const users = {
-    //   template: {
-    //     p: 'test',
-    //     tch: [],
-    //   },
-    // };
+    console.log(credentials);
 
-    // const hash = SHA1(credentials.username).toString();
-    // credentials.username = hash;
+    const users = JSON.parse(localStorage.getItem('users'));
 
-    // users[credentials.username] = {
-    //   p: credentials.password,
-    //   tch: [],
-    // };
+    users[credentials.username] = {
+      p: credentials.password,
+      tch: [],
+    };
 
     // Register the User
-    // localStorage.setItem('users', JSON.stringify(users));
-
-    // const reshash = SHA1(credentials.username).toString();
-    // console.log(usersList[reshash]);
-
-    // const val = AES.decrypt(usersList[reshash].p, '123456A').toString(enc.Utf8);
-
-    console.log('token generated: ', this.authenticate(credentials));
-    // usersList[credentials.username] = {
-    //   p: credentials.password,
-    //   tch: [],
-    // };
-
-    // localStorage.setItem('users', JSON.stringify(usersList));
-
-    // users['template'].p = 'test';
+    localStorage.setItem('users', JSON.stringify(users));
   }
 }
 

@@ -3,12 +3,17 @@ import { useState } from 'react';
 import LoginForm from '../Views/LoginView';
 import MainToolsView from '../Views/MainToolsView';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
 import './style.css';
 
 const Protected = ({ isLoggedIn, children }) => {
-  if (!isLoggedIn) return <LoginForm />;
+  if (!isLoggedIn) return <Navigate to="/" replace />;
   return children;
 };
 
@@ -33,7 +38,8 @@ export default function App(props) {
 
     updateToken({
       loggedIn: true,
-      callHistory: val,
+      user: val.user,
+      callHistory: val.userCallHistory,
     });
 
     return true;
@@ -62,6 +68,7 @@ export default function App(props) {
               <Protected isLoggedIn={isLoggedIn}>
                 <MainToolsView
                   callHistory={isLoggedIn ? tokenization.callHistory : null}
+                  user={isLoggedIn ? tokenization.user : null}
                 />
               </Protected>
             }

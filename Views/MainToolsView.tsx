@@ -21,7 +21,7 @@ const MainToolsView = (props) => {
     updateMerchantHistory([...merchantHistory]);
 
     // Store Data into Local Storage
-    LocalStorageWorker.store(merchantHistory);
+    LocalStorageWorker.store({ merchantHistory, user: props.user });
   };
 
   const handleChange = (event) => {
