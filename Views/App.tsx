@@ -32,32 +32,25 @@ export default function App(props) {
   const loginIntoToolsHandler = (e) => {
     const [username, password] = e.target;
 
-    DebuggingManager.debug(logOutOfToolsHandler.name, 33, [
-      username.value,
-      password.value,
-    ]);
+    const credentials: Credentials = {
+      username: username.value,
+      password: password.value,
+    };
 
-    // const credentials: Credentials = {
-    //   username: username.value,
-    //   password: password.value,
-    // };
+    const val = props.sessionManager.localSessionAuthenticate(credentials);
 
-    // DebuggingManager.debug2(credentials)
+    console.log(val);
 
-    // const val = props.sessionManager.localSessionAuthenticate(credentials);
+    // NOTE: Refactor Later if user is not properly authenticated then return false statement
+    if (!val) return false;
 
-    // console.log(val);
+    updateToken({
+      loggedIn: true,
+      user: val.user,
+      callHistory: val.userCallHistory,
+    });
 
-    // // NOTE: Refactor Later if user is not properly authenticated then return false statement
-    // if (!val) return false;
-
-    // updateToken({
-    //   loggedIn: true,
-    //   user: val.user,
-    //   callHistory: val.userCallHistory,
-    // });
-
-    // return true;
+    return true;
   };
 
   // MARK: Log Out of the Screen

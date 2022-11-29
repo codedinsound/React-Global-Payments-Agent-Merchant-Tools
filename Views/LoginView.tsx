@@ -10,12 +10,12 @@ const LoginForm = (props) => {
   const handleSumbission = (e) => {
     e.preventDefault();
 
-    DebuggingManager.debug(handleSumbission.name, 11, [
-      e.target.username.value,
-      e.target.password.value,
-    ]);
+    // DebuggingManager.debug(handleSumbission.name, 11, [
+    //   e.target.username.value,
+    //   e.target.password.value,
+    // ]);
 
-    const navigateNext = props.loginIntoToolsHandler(e);
+    // const navigateNext = props.loginIntoToolsHandler(e);
 
     // if (navigateNext) {
     //   navigate('/tools');
