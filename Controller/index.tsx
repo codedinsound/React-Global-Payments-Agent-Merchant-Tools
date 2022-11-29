@@ -54,10 +54,30 @@ class SessionManagerWorker {
 
 interface Session {
   register(credentials);
+  authenticate(credentials): boolean;
 }
 
+interface Credentials {
+  username: string;
+  password: string;
+}
+
+// For Simulating a Database Using Local Storage Actual Authentication Goes
+// Deeper than that with utilizing a server and database respectively.
 class LocalSessionWorker implements Session {
-  register(credentials) {
+  // Auth
+  authenticate(credentials: Credentials): boolean {
+    const usersList = JSON.parse(localStorage.getItem('users'));
+    const getUsernameHashValue = SHA1(credentials.username).toString();
+
+    const val = AES.decrypt(
+      usersList[getUsernameHashValue].p,
+      credentials.password
+    ).toString(enc.Utf8);
+
+    return val === credentials.password;
+  }
+  register(credentials: Credentials) {
     console.log(credentials);
 
     // credentials.username = AES.encrypt(
@@ -65,8 +85,10 @@ class LocalSessionWorker implements Session {
     //   credentials.username
     // ).toString();
 
+    // const compared = credentials.password;
+
     // credentials.password = AES.encrypt(
-    //   credentials.username,
+    //   credentials.password,
     //   credentials.password
     // ).toString();
 
@@ -88,11 +110,12 @@ class LocalSessionWorker implements Session {
     // Register the User
     // localStorage.setItem('users', JSON.stringify(users));
 
-    const usersList = JSON.parse(localStorage.getItem('users'));
+    // const reshash = SHA1(credentials.username).toString();
+    // console.log(usersList[reshash]);
 
-    const reshash = SHA1(credentials.username).toString();
-    console.log(usersList[reshash]);
+    // const val = AES.decrypt(usersList[reshash].p, '123456A').toString(enc.Utf8);
 
+    console.log('token generated: ', this.authenticate(credentials));
     // usersList[credentials.username] = {
     //   p: credentials.password,
     //   tch: [],
@@ -113,6 +136,11 @@ class SessionManager {
 
   localSessionRegister(credentals): void {
     this.localSessionWorker.register(credentals);
+  }
+
+  localSessionAuthenticate(credentials): boolean {
+    this.localSessionWorker.authenticate(credentials);
+    return true;
   }
 }
 
