@@ -45,9 +45,11 @@ export default function App(props) {
     return true;
   };
 
-  let isLoggedIn = tokenization ? tokenization.loggedIn : false;
+  const logOutOfToolsHandler = (e) => {
+    updateToken(null);
+  };
 
-  console.log(tokenization);
+  let isLoggedIn = tokenization ? tokenization.loggedIn : false;
 
   return (
     <React.Fragment>
@@ -69,6 +71,7 @@ export default function App(props) {
                 <MainToolsView
                   callHistory={isLoggedIn ? tokenization.callHistory : null}
                   user={isLoggedIn ? tokenization.user : null}
+                  logOut={isLoggedIn ? logOutOfToolsHandler : null}
                 />
               </Protected>
             }

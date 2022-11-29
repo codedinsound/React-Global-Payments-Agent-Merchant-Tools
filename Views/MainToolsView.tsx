@@ -86,12 +86,15 @@ const MainToolsView = (props) => {
     navigator.clipboard.writeText(displayFields.dba);
   };
 
+  const handleLoggingOut = () => {
+    console.log('fire');
+    props.logOut();
+  };
+
   return (
     <div>
       <div className="navigation">
-        <button onClick={() => alert('needs to be implemented')}>
-          Log Out
-        </button>
+        <button onClick={handleLoggingOut}>Log Out</button>
       </div>
       <div className="top-display">
         <h1>Caller Info</h1>

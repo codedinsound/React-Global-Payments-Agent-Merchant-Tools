@@ -34,7 +34,7 @@ const LoginForm = (props) => {
         </div>
       </form>
 
-      <button
+      {/* <button
         onClick={() => {
           console.log('Register');
 
@@ -47,7 +47,7 @@ const LoginForm = (props) => {
         }}
       >
         Register
-      </button>
+      </button> */}
     </div>
   );
 };
