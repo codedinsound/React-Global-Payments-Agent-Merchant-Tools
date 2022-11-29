@@ -11,7 +11,6 @@ class LocalStorageWorker {
   static store(data): void {
     let retrivedStorage = JSON.parse(localStorage.getItem('users'));
 
-    console.log('past', data);
     retrivedStorage[data.user].tch = data.merchantHistory;
 
     // Update Local Storage
