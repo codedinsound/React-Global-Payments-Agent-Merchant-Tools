@@ -14,17 +14,16 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
-import { DebuggingManager } from '../Testing';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <Navigate to="/" replace />;
   return children;
 };
 
-interface Credentials {
-  username: string;
-  password: string;
-}
+// interface Credentials {
+//   username: string;
+//   password: string
+// }
 
 export default function App(props) {
   const [tokenization, updateToken] = useState(null);
@@ -32,25 +31,25 @@ export default function App(props) {
   const loginIntoToolsHandler = (e) => {
     const [username, password] = e.target;
 
-    const credentials: Credentials = {
-      username: username.value,
-      password: password.value,
-    };
+    // const credentials: Credentials = {
+    //   username: username.value,
+    //   password: password.value,
+    // };
 
-    const val = props.sessionManager.localSessionAuthenticate(credentials);
+    // const val = props.sessionManager.localSessionAuthenticate(credentials);
 
-    console.log(val);
+    // console.log(val);
 
-    // NOTE: Refactor Later if user is not properly authenticated then return false statement
-    if (!val) return false;
+    // // NOTE: Refactor Later if user is not properly authenticated then return false statement
+    // if (!val) return false;
 
-    updateToken({
-      loggedIn: true,
-      user: val.user,
-      callHistory: val.userCallHistory,
-    });
+    // updateToken({
+    //   loggedIn: true,
+    //   user: val.user,
+    //   callHistory: val.userCallHistory,
+    // });
 
-    return true;
+    // return true;
   };
 
   // MARK: Log Out of the Screen
