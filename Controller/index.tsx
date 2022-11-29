@@ -49,33 +49,35 @@ class LocalSessionWorker implements Session {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
 
-    const getUsernameHashValue = SHA1(credentials.username).toString();
+    console.log(master);
 
-    if (!master.usersList[getUsernameHashValue]) {
-      console.log('user not found....');
-      return false;
-    }
+    // const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    const val = AES.decrypt(
-      master.usersList[getUsernameHashValue].p,
-      credentials.password
-    ).toString(enc.Utf8);
+    // if (!master.usersList[getUsernameHashValue]) {
+    //   console.log('user not found....');
+    //   return false;
+    // }
 
-    let userCallHistory;
+    // const val = AES.decrypt(
+    //   master.usersList[getUsernameHashValue].p,
+    //   credentials.password
+    // ).toString(enc.Utf8);
 
-    // This Section of Code Generates a temporary token with all the users
-    if (val === credentials.password) {
-      userCallHistory = master.usersList[getUsernameHashValue].tch;
-      return {
-        user: getUsernameHashValue,
-        userCallHistory,
-      };
-    }
+    // let userCallHistory;
 
-    console.log('Wrong Password');
-    delete master.usersList;
+    // // This Section of Code Generates a temporary token with all the users
+    // if (val === credentials.password) {
+    //   userCallHistory = master.usersList[getUsernameHashValue].tch;
+    //   return {
+    //     user: getUsernameHashValue,
+    //     userCallHistory,
+    //   };
+    // }
 
-    return false;
+    // console.log('Wrong Password');
+    // delete master.usersList;
+
+    // return false;
   }
   register(credentials: Credentials) {
     console.log(credentials);

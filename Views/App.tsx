@@ -17,10 +17,10 @@ const Protected = ({ isLoggedIn, children }) => {
   return children;
 };
 
-// interface Credentials {
-//   username: string;
-//   password: string
-// }
+interface Credentials {
+  username: string;
+  password: string;
+}
 
 export default function App(props) {
   const [tokenization, updateToken] = useState(null);
@@ -28,12 +28,12 @@ export default function App(props) {
   const loginIntoToolsHandler = (e) => {
     const [username, password] = e.target;
 
-    // const credentials: Credentials = {
-    //   username: username.value,
-    //   password: password.value,
-    // };
+    const credentials: Credentials = {
+      username: username.value,
+      password: password.value,
+    };
 
-    // const val = props.sessionManager.localSessionAuthenticate(credentials);
+    const val = props.sessionManager.localSessionAuthenticate(credentials);
 
     // console.log(val);
 
