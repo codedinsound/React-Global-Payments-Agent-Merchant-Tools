@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SessionManager } from '../Controller';
 
 const LoginForm = (props) => {
   const navigate = useNavigate();
@@ -23,11 +22,11 @@ const LoginForm = (props) => {
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input type="text" id="username" value={'test'} readOnly />
+          <input type="text" id="username" />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input type="password" id="password" value={'test'} readOnly />
+          <input type="password" id="password" />
         </div>
         <div className="login-fields-button">
           <button>Log In</button>
