@@ -1,5 +1,6 @@
 import { DisplayObject } from '../Model';
 import { SHA1, AES, enc } from 'crypto-js';
+import { useReducer } from 'react';
 
 class LocalStorageWorker {
   static load(): DisplayObject[] {
@@ -54,7 +55,7 @@ class SessionManagerWorker {
 
 interface Session {
   register(credentials);
-  authenticate(credentials): boolean;
+  authenticate(credentials);
 }
 
 interface Credentials {
@@ -66,16 +67,32 @@ interface Credentials {
 // Deeper than that with utilizing a server and database respectively.
 class LocalSessionWorker implements Session {
   // Auth
-  authenticate(credentials: Credentials): boolean {
-    const usersList = JSON.parse(localStorage.getItem('users'));
+  authenticate(credentials: Credentials) {
+    const master = {
+      usersList: JSON.parse(localStorage.getItem('users')),
+    };
+
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
     const val = AES.decrypt(
-      usersList[getUsernameHashValue].p,
+      master.usersList[getUsernameHashValue].p,
       credentials.password
     ).toString(enc.Utf8);
 
-    return val === credentials.password;
+    let userCallHistory;
+
+    console.log(userCallHistory);
+
+    // This Section of Code Generates a temporary token with all the users
+    if (val === credentials.password) {
+      userCallHistory = master.usersList[getUsernameHashValue].tch;
+
+      return userCallHistory;
+    }
+
+    delete master.usersList;
+
+    return null;
   }
   register(credentials: Credentials) {
     console.log(credentials);
