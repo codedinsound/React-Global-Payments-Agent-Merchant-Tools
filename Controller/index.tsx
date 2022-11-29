@@ -44,25 +44,25 @@ class LocalSessionWorker implements Session {
 
     console.log(master);
 
-    // const getUsernameHashValue = SHA1(credentials.username).toString();
+    const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    // const val = AES.decrypt(
-    //   master.usersList[getUsernameHashValue].p,
-    //   credentials.password
-    // ).toString(enc.Utf8);
+    const val = AES.decrypt(
+      master.usersList[getUsernameHashValue].p,
+      credentials.password
+    ).toString(enc.Utf8);
 
-    // let userCallHistory;
+    let userCallHistory;
 
-    // // This Section of Code Generates a temporary token with all the users
-    // if (val === credentials.password) {
-    //   userCallHistory = master.usersList[getUsernameHashValue].tch;
-    //   return {
-    //     user: getUsernameHashValue,
-    //     userCallHistory,
-    //   };
-    // }
+    // This Section of Code Generates a temporary token with all the users
+    if (val === credentials.password) {
+      userCallHistory = master.usersList[getUsernameHashValue].tch;
+      return {
+        user: getUsernameHashValue,
+        userCallHistory,
+      };
+    }
 
-    // delete master.usersList;
+    delete master.usersList;
 
     return null;
   }
