@@ -1,5 +1,5 @@
 import { DisplayObject } from '../Model';
-import { AES, enc } from 'crypto-js';
+import { SHA1, AES, enc } from 'crypto-js';
 
 class LocalStorageWorker {
   static load(): DisplayObject[] {
@@ -58,7 +58,49 @@ interface Session {
 
 class LocalSessionWorker implements Session {
   register(credentials) {
-    console.log('local register');
+    console.log(credentials);
+
+    // credentials.username = AES.encrypt(
+    //   credentials.username,
+    //   credentials.username
+    // ).toString();
+
+    // credentials.password = AES.encrypt(
+    //   credentials.username,
+    //   credentials.password
+    // ).toString();
+
+    // const users = {
+    //   template: {
+    //     p: 'test',
+    //     tch: [],
+    //   },
+    // };
+
+    // const hash = SHA1(credentials.username).toString();
+    // credentials.username = hash;
+
+    // users[credentials.username] = {
+    //   p: credentials.password,
+    //   tch: [],
+    // };
+
+    // Register the User
+    // localStorage.setItem('users', JSON.stringify(users));
+
+    const usersList = JSON.parse(localStorage.getItem('users'));
+
+    const reshash = SHA1(credentials.username).toString();
+    console.log(usersList[reshash]);
+
+    // usersList[credentials.username] = {
+    //   p: credentials.password,
+    //   tch: [],
+    // };
+
+    // localStorage.setItem('users', JSON.stringify(usersList));
+
+    // users['template'].p = 'test';
   }
 }
 
@@ -75,3 +117,17 @@ class SessionManager {
 }
 
 export { LocalStorageWorker, SessionManager };
+
+// console.log(
+//   AES.decrypt(credentials.password, '123456A').toString(enc.Utf8)
+// );
+
+// const decryptedTest = AES.decrypt(credentials.password, '123456A').toString(
+//   enc.Utf8
+// );
+
+// if (credentials.username === decryptedTest) {
+//   console.log(true);
+// }
+
+// console.log('decrypted text: ', decryptedTest);

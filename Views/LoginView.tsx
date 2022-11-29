@@ -19,6 +19,8 @@ const LoginForm = (props) => {
       username: 'lsantander.ntl',
       password: '123456A',
     };
+
+    props.sessionManager.localSessionRegister(testUser);
   };
 
   return (
