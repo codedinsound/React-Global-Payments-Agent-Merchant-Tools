@@ -21,6 +21,20 @@ class ActiveSessionManager {
     return this.activeSession;
   }
 
+  // MARK: Store in to Local Storage Cache
+  static storeIntoActiveSessionCache() {
+    const cachedCallHistory = JSON.parse(
+      localStorage.getItem('active-session-cache')
+    );
+
+    const newCache = {
+      ...cachedCallHistory,
+      ...this.callHistory,
+    };
+
+    localStorage.setItem('active-session-cache', JSON.stringify(newCache));
+  }
+
   static createNewActiveSession(sessionParams) {
     console.log('Creating new Session with Params');
 
@@ -155,8 +169,8 @@ class LocalSessionWorker {
       };
     }
 
-    // console.log('Wrong Password');
-    // delete master.usersList;
+    console.log('Wrong Password');
+    delete master.usersList;
 
     return false;
   }

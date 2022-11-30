@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Clock from 'react-live-clock';
+import { ActiveSessionManager } from '../Controller';
 import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
@@ -22,7 +23,7 @@ const MainToolsView = (props) => {
     // Store Data into Local Storage
     console.log(merchantHistory);
 
-    // LocalStorageWorker.store({ merchantHistory, user: props.user });
+    ActiveSessionManager.storeIntoActiveSessionCache();
   };
 
   const handleChange = (event) => {
