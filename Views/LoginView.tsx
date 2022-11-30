@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 const LoginForm = (props) => {
   const navigate = useNavigate();
 
-  // if (props.isLoggedIn) return <Navigate to="/tools" replace />;
+  if (props.isLoggedIn) return <Navigate to="/tools" />;
 
   const handleSumbission = (e) => {
     e.preventDefault();

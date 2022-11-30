@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
-import { ActiveSessionManager, SessionManager } from '../Controller';
+import { ActiveSessionManager } from '../Controller';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <Navigate to="/" replace />;

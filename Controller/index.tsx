@@ -56,7 +56,7 @@ class ActiveSessionManager {
 
   static reestablisActiveSession() {
     this.callHistory = JSON.parse(localStorage.getItem('active-session-cache'));
-    return this.callHistory;
+    return this.callHistory.userCallHistory;
   }
 
   static endSession() {}
