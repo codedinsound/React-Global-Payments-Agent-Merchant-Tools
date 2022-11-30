@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Clock from 'react-live-clock';
-import { LocalStorageWorker } from '../Controller';
 import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
@@ -21,7 +20,9 @@ const MainToolsView = (props) => {
     updateMerchantHistory([...merchantHistory]);
 
     // Store Data into Local Storage
-    LocalStorageWorker.store({ merchantHistory, user: props.user });
+    console.log(merchantHistory);
+
+    // LocalStorageWorker.store({ merchantHistory, user: props.user });
   };
 
   const handleChange = (event) => {

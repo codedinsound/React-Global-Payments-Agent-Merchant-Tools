@@ -9,7 +9,7 @@ const prefilledResponses = [
   },
   {
     option: 'Translink Password Reset',
-    filled_reason: 'Helped merchant with reseting their translink account.',
+    filled_reason: 'Helped merchant with resetting their Translink account.',
   },
   {
     option: 'TXP Unlock',

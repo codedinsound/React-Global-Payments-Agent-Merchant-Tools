@@ -28,6 +28,8 @@ export default function App(props) {
 
   const isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
+  console.log(31, isSessionAlive);
+
   let token = null;
 
   if (isSessionAlive) {
@@ -35,7 +37,7 @@ export default function App(props) {
 
     token = {
       loggedIn: ActiveSessionManager.getActiveSession().isLoggedIn,
-      user: ActiveSessionManager.getActiveSession().userName,
+      userName: ActiveSessionManager.getActiveSession().userName,
       callHistory: ActiveSessionManager.reestablisActiveSession(),
     };
   }
@@ -78,9 +80,7 @@ export default function App(props) {
     ActiveSessionManager.endSession();
   };
 
-  // let isLoggedIn = tokenization ? tokenization.loggedIn : false;
-
-  let isLoggedIn = false;
+  let isLoggedIn = tokenization ? tokenization.loggedIn : false;
 
   return (
     <React.Fragment>
