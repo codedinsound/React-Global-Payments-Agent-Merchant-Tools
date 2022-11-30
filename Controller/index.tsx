@@ -48,8 +48,6 @@ class ActiveSessionManager {
       userCallHistory: sessionParams.userCallHistory,
     };
 
-    console.log(45, aliveParams, sessionCache);
-
     localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
     localStorage.setItem('active-session-cache', JSON.stringify(sessionCache));
   }
