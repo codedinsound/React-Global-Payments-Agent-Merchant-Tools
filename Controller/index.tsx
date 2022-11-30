@@ -1,43 +1,29 @@
-import { DisplayObject } from '../Model';
 import { SHA1, AES, enc } from 'crypto-js';
-
-// class LocalStorageWorker {
-//   static load(): DisplayObject[] {
-//     const retrivedStorage: string = localStorage.getItem('history');
-//     return retrivedStorage !== null ? JSON.parse(retrivedStorage) : [];
-//   }
-
-//   static store(data): void {
-//     let retrivedStorage = JSON.parse(localStorage.getItem('users'));
-
-//     retrivedStorage[data.user].tch = data.merchantHistory;
-
-//     // Update Local Storage
-//     retrivedStorage = JSON.stringify(retrivedStorage);
-
-//     localStorage.setItem('users', retrivedStorage);
-//   }
-// }
-
-interface Session {
-  register(credentials);
-  authenticate(credentials);
-}
 
 interface Credentials {
   username: string;
   password: string;
 }
 
+interface Session {
+  isLoggedIn: boolean;
+  isSessionAlive: boolean;
+  userHash: string;
+  userName: string;
+}
+
 class ActiveSessionManager {
   static callHistory;
+  static activeSession: Session;
+
+  static getActiveSession(): Session {
+    return this.activeSession;
+  }
 
   static createNewActiveSession(sessionParams) {
     console.log('Creating new Session with Params', sessionParams);
 
-    // TODO: CREATE LOGIC FOR CREATING A LIVE SESSION IN LOCAL STORAGE
-
-    const aliveParams = {
+    const aliveParams: Session = {
       isSessionAlive: sessionParams.isSessionAlive,
       isLoggedIn: true,
       userHash: sessionParams.userHash,
@@ -56,34 +42,48 @@ class ActiveSessionManager {
 
   static reestablisActiveSession() {
     this.callHistory = JSON.parse(localStorage.getItem('active-session-cache'));
+    this.activeSession = JSON.parse(
+      localStorage.getItem('active-session-alive')
+    );
     return this.callHistory.userCallHistory;
   }
 
-  static endSession() {}
+  static endSession() {
+    console.log('ending session');
 
-  static sessionTimeout() {}
+    const reset: Session = {
+      isLoggedIn: false,
+      isSessionAlive: false,
+      userHash: '',
+      userName: '',
+    };
 
+    this.callHistory = [];
+
+    localStorage.setItem('active-session-alive', JSON.stringify(reset));
+  }
+
+  // NOTE: Transform this into a live booleanic Value
   static checkForActiveSessions() {
-    console.log('Active Session Found');
+    console.log('Check if Session is Alive');
 
-    const seshString: string = localStorage.getItem('active-session-alive');
-    const sesh = JSON.parse(seshString);
+    const isAlive: boolean = JSON.parse(
+      localStorage.getItem('active-session-alive')
+    ).isSessionAlive;
 
-    if (sesh && sesh.isSessionAlive) return sesh;
-
-    return null;
+    return isAlive;
   }
 }
 
 // For Simulating a Database Using Local Storage Actual Authentication Goes
 // Deeper than that with utilizing a server and database respectively.
-class LocalSessionWorker implements Session {
+class LocalSessionWorker {
   // Auth
   authenticate(credentials: Credentials) {
     let userCallHistory;
 
-    const master = {
-      usersList: JSON.parse(localStorage.getItem('users')),
+    const master = {``
+      usersList: JSON.parse(localStorage.getItem('active-session-cache')),
     };
 
     console.log('Gets the entire local database of users...');
@@ -172,7 +172,7 @@ class SessionManager {
   }
 }
 
-export { LocalStorageWorker, SessionManager, ActiveSessionManager };
+export { SessionManager, ActiveSessionManager };
 
 // console.log(
 //   AES.decrypt(credentials.password, '123456A').toString(enc.Utf8)

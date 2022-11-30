@@ -26,17 +26,16 @@ interface Credentials {
 export default function App(props) {
   // TODO: CHECK FOR ANY ACTIVE SESSION AND UPDATE STATE IMMEDIATELY
 
-  let sesh = ActiveSessionManager.checkForActiveSessions();
+  let isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
   let token = null;
 
-  if (sesh.isSessionAlive) {
-    console.log('Session is alive and well');
-    console.log(35, sesh);
+  if (isSessionAlive) {
+    ActiveSessionManager.reestablisActiveSession();
 
     token = {
-      loggedIn: sesh.isLoggedIn,
-      user: sesh.userHash,
+      loggedIn: ActiveSessionManager.getActiveSession().isLoggedIn,
+      user: ActiveSessionManager.getActiveSession().userName,
       callHistory: ActiveSessionManager.reestablisActiveSession(),
     };
   }
@@ -52,7 +51,6 @@ export default function App(props) {
     };
 
     const val = props.sessionManager.localSessionAuthenticate(credentials);
-    console.log(46, val);
 
     // NOTE: Refactor Later if user is not properly authenticated then return false statement
     if (!val) return false;
@@ -68,10 +66,19 @@ export default function App(props) {
 
   // MARK: Log Out of the Screen
   const logOutOfToolsHandler = (e) => {
-    updateToken(null);
+    console.log('Logging Out....');
+    updateToken({
+      loggedIn: false,
+      user: '',
+      callHistory: null,
+    });
+
+    ActiveSessionManager.endSession();
   };
 
   let isLoggedIn = tokenization ? tokenization.loggedIn : false;
+
+  console.log(isLoggedIn);
 
   return (
     <React.Fragment>
