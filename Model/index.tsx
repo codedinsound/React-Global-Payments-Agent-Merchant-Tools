@@ -1,6 +1,6 @@
 import prefilledResponses from '../Model/PreWrittenResponses';
 import DisplayObject from './DisplayObject';
 
-import Session from './Session Management';
+import { Credentials, Session } from './Session Management';
 
-export { DisplayObject, prefilledResponses, Session };
+export { Credentials, DisplayObject, prefilledResponses, Session };
