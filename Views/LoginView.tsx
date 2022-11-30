@@ -1,21 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const LoginForm = (props) => {
   const navigate = useNavigate();
+
+  // if (props.isLoggedIn) return <Navigate to="/tools" replace />;
 
   const handleSumbission = (e) => {
     e.preventDefault();
 
     const navigateNext = props.loginIntoToolsHandler(e);
 
-    // if (navigateNext) {
-    //   navigate('/tools');
-    // } else {
-    //   navigate('/');
-    // }
+    if (navigateNext) {
+      navigate('/tools');
+    } else {
+      navigate('/');
+    }
   };
-
 
   return (
     <div className="login-container">

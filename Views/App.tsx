@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
+import { ActiveSessionManager, SessionManager } from '../Controller';
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <Navigate to="/" replace />;
@@ -24,7 +25,23 @@ interface Credentials {
 
 export default function App(props) {
   // TODO: CHECK FOR ANY ACTIVE SESSION AND UPDATE STATE IMMEDIATELY
-  const [tokenization, updateToken] = useState(null);
+
+  let sesh = ActiveSessionManager.checkForActiveSessions();
+
+  let token = null;
+
+  if (sesh.isSessionAlive) {
+    console.log('Session is alive and well');
+    console.log(35, sesh);
+
+    token = {
+      loggedIn: sesh.isLoggedIn,
+      user: sesh.userHash,
+      callHistory: ActiveSessionManager.reestablisActiveSession(),
+    };
+  }
+
+  const [tokenization, updateToken] = useState(token);
 
   const loginIntoToolsHandler = (e) => {
     const [username, password] = e.target;
@@ -35,18 +52,18 @@ export default function App(props) {
     };
 
     const val = props.sessionManager.localSessionAuthenticate(credentials);
-    console.log(val);
+    console.log(46, val);
 
-    // // NOTE: Refactor Later if user is not properly authenticated then return false statement
-    // if (!val) return false;
+    // NOTE: Refactor Later if user is not properly authenticated then return false statement
+    if (!val) return false;
 
-    // updateToken({
-    //   loggedIn: true,
-    //   user: val.user,
-    //   callHistory: val.userCallHistory,
-    // });
+    updateToken({
+      loggedIn: true,
+      user: val.user,
+      callHistory: val.userCallHistory,
+    });
 
-    // return true;
+    return true;
   };
 
   // MARK: Log Out of the Screen
@@ -64,6 +81,7 @@ export default function App(props) {
             path="/"
             element={
               <LoginForm
+                isLoggedIn={isLoggedIn}
                 loginIntoToolsHandler={loginIntoToolsHandler}
                 sessionManager={props.sessionManager}
               />

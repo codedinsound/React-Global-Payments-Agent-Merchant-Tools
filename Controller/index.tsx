@@ -30,19 +30,49 @@ interface Credentials {
 }
 
 class ActiveSessionManager {
+  static callHistory;
+
   static createNewActiveSession(sessionParams) {
     console.log('Creating new Session with Params', sessionParams);
 
     // TODO: CREATE LOGIC FOR CREATING A LIVE SESSION IN LOCAL STORAGE
+
+    const aliveParams = {
+      isSessionAlive: sessionParams.isSessionAlive,
+      isLoggedIn: true,
+      userHash: sessionParams.userHash,
+      userName: sessionParams.userName,
+    };
+
+    const sessionCache = {
+      userCallHistory: sessionParams.userCallHistory,
+    };
+
+    console.log(45, aliveParams);
+
+    localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
+    localStorage.setItem('active-session-cache', JSON.stringify(sessionCache));
   }
 
-  static reestablisActiveSession() {}
+  static reestablisActiveSession() {
+    this.callHistory = JSON.parse(localStorage.getItem('active-session-cache'));
+    return this.callHistory;
+  }
 
   static endSession() {}
 
   static sessionTimeout() {}
 
-  static checkForActiveSessions() {}
+  static checkForActiveSessions() {
+    console.log('Active Session Found');
+
+    const seshString: string = localStorage.getItem('active-session-alive');
+    const sesh = JSON.parse(seshString);
+
+    if (sesh && sesh.isSessionAlive) return sesh;
+
+    return null;
+  }
 }
 
 // For Simulating a Database Using Local Storage Actual Authentication Goes
@@ -89,16 +119,17 @@ class LocalSessionWorker implements Session {
       };
 
       ActiveSessionManager.createNewActiveSession(sessionParams);
-      // return {
-      //   user: getUsernameHashValue,
-      //   userCallHistory,
-      // };
+
+      return {
+        user: getUsernameHashValue,
+        userCallHistory,
+      };
     }
 
-    // console.log('Wrong Password');
-    // delete master.usersList;
+    console.log('Wrong Password');
+    delete master.usersList;
 
-    // return false;
+    return false;
   }
   register(credentials: Credentials) {
     console.log(credentials);
@@ -141,7 +172,7 @@ class SessionManager {
   }
 }
 
-export { LocalStorageWorker, SessionManager };
+export { LocalStorageWorker, SessionManager, ActiveSessionManager };
 
 // console.log(
 //   AES.decrypt(credentials.password, '123456A').toString(enc.Utf8)
