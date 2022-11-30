@@ -80,9 +80,8 @@ class ActiveSessionManager {
       userName: '',
     };
 
-    this.callHistory = [];
-
     localStorage.setItem('active-session-alive', JSON.stringify(reset));
+    localStorage.setItem('active-session-cache', JSON.stringify([]));
   }
 
   // NOTE: Transform this into a live booleanic Value
@@ -161,6 +160,8 @@ class LocalSessionWorker {
 
     return false;
   }
+
+  // MARK: Register New Agents
   register(credentials: Credentials) {
     console.log(credentials);
 
