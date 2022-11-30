@@ -1,5 +1,4 @@
 import { SHA1, AES, enc } from 'crypto-js';
-import { act } from 'react-dom/test-utils';
 
 interface Credentials {
   username: string;
