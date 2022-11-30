@@ -1,15 +1,10 @@
 import { SHA1, AES, enc } from 'crypto-js';
 
+import { Session } from '../Model';
+
 interface Credentials {
   username: string;
   password: string;
-}
-
-interface Session {
-  isLoggedIn: boolean;
-  isSessionAlive: boolean;
-  userHash: string;
-  userName: string;
 }
 
 class ActiveSessionManager {
