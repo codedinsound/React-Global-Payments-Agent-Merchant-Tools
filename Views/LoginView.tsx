@@ -6,8 +6,9 @@ const LoginForm = (props) => {
 
   if (props.isLoggedIn) return <Navigate to="/tools" />;
 
-  const handleSumbission = (e) => {
+  const loginSubmissionHandler = (e) => {
     e.preventDefault();
+    console.log(loginSubmissionHandler.name, 12, 'fired');
 
     const navigateNext = props.loginIntoToolsHandler(e);
 
@@ -20,7 +21,7 @@ const LoginForm = (props) => {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleSumbission}>
+      <form onSubmit={loginSubmissionHandler}>
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>

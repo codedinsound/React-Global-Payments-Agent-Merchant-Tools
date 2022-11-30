@@ -22,10 +22,10 @@ class ActiveSessionManager {
   }
 
   static createNewActiveSession(sessionParams) {
-    console.log('Creating new Session with Params', sessionParams);
+    console.log('Creating new Session with Params');
 
     const aliveParams: Session = {
-      isSessionAlive: sessionParams.isSessionAlive,
+      isSessionAlive: true,
       isLoggedIn: true,
       userHash: sessionParams.userHash,
       userName: sessionParams.userName,
@@ -35,7 +35,7 @@ class ActiveSessionManager {
       userCallHistory: sessionParams.userCallHistory,
     };
 
-    console.log(45, aliveParams);
+    console.log(45, aliveParams, sessionCache);
 
     localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
     localStorage.setItem('active-session-cache', JSON.stringify(sessionCache));
@@ -118,6 +118,8 @@ class LocalSessionWorker {
 
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
+    console.log(master);
+
     if (!master.usersList[getUsernameHashValue]) {
       console.log('user not found....');
       return false;
@@ -133,28 +135,29 @@ class LocalSessionWorker {
     if (val === credentials.password) {
       userCallHistory = ActiveSessionManager.callHistory;
 
-      console.log(userCallHistory);
+      console.log(138, ActiveSessionManager.callHistory); // <---------------------------------------------------------- DEUBGGER
 
-      // Create an active live session
-      console.log(credentials.username);
+      // // Create an active live session
+      // console.log(credentials.username);
 
       const sessionParams = {
-        isSessionAlive: true,
         userHash: getUsernameHashValue,
         userName: credentials.username,
-        userCallHistory,
+        userCallHistory: [],
       };
+
+      console.log(150, sessionParams); // <---------------------------------------------------------- DEUBGGER
 
       ActiveSessionManager.createNewActiveSession(sessionParams);
 
       return {
         user: getUsernameHashValue,
-        userCallHistory,
+        userCallHistory: [],
       };
     }
 
-    console.log('Wrong Password');
-    delete master.usersList;
+    // console.log('Wrong Password');
+    // delete master.usersList;
 
     return false;
   }

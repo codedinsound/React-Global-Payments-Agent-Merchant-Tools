@@ -26,7 +26,7 @@ interface Credentials {
 export default function App(props) {
   // TODO: CHECK FOR ANY ACTIVE SESSION AND UPDATE STATE IMMEDIATELY
 
-  let isSessionAlive = ActiveSessionManager.checkForActiveSessions();
+  const isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
   let token = null;
 
@@ -51,9 +51,8 @@ export default function App(props) {
       password: password.value,
     };
 
+    console.log(loginIntoToolsHandler.name, 57, credentials); // <-------------------------------------- DEBUG LINE
     const val = props.sessionManager.localSessionAuthenticate(credentials);
-
-    console.log(57, val);
 
     // NOTE: Refactor Later if user is not properly authenticated then return false statement
     if (!val) return false;
