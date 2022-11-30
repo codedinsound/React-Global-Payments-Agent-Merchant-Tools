@@ -157,6 +157,14 @@ const MainToolsView = (props) => {
           <div className="control-radio-btns">
             <input
               type="radio"
+              value="Could Not Verify"
+              id="sv"
+              name="confirmation"
+              onChange={handleChange}
+            />{' '}
+            Could Not Verify
+            <input
+              type="radio"
               value="DBA Confirmed"
               id="sv"
               name="confirmation"

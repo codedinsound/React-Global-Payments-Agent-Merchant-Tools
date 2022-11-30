@@ -1,23 +1,23 @@
 import { DisplayObject } from '../Model';
 import { SHA1, AES, enc } from 'crypto-js';
 
-class LocalStorageWorker {
-  static load(): DisplayObject[] {
-    const retrivedStorage: string = localStorage.getItem('history');
-    return retrivedStorage !== null ? JSON.parse(retrivedStorage) : [];
-  }
+// class LocalStorageWorker {
+//   static load(): DisplayObject[] {
+//     const retrivedStorage: string = localStorage.getItem('history');
+//     return retrivedStorage !== null ? JSON.parse(retrivedStorage) : [];
+//   }
 
-  static store(data): void {
-    let retrivedStorage = JSON.parse(localStorage.getItem('users'));
+//   static store(data): void {
+//     let retrivedStorage = JSON.parse(localStorage.getItem('users'));
 
-    retrivedStorage[data.user].tch = data.merchantHistory;
+//     retrivedStorage[data.user].tch = data.merchantHistory;
 
-    // Update Local Storage
-    retrivedStorage = JSON.stringify(retrivedStorage);
+//     // Update Local Storage
+//     retrivedStorage = JSON.stringify(retrivedStorage);
 
-    localStorage.setItem('users', retrivedStorage);
-  }
-}
+//     localStorage.setItem('users', retrivedStorage);
+//   }
+// }
 
 interface Session {
   register(credentials);
