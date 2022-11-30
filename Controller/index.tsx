@@ -1,4 +1,5 @@
 import { SHA1, AES, enc } from 'crypto-js';
+import { act } from 'react-dom/test-utils';
 
 interface Credentials {
   username: string;
@@ -41,10 +42,31 @@ class ActiveSessionManager {
   }
 
   static reestablisActiveSession() {
-    this.callHistory = JSON.parse(localStorage.getItem('active-session-cache'));
-    this.activeSession = JSON.parse(
+    const callHistoryCache = JSON.parse(
+      localStorage.getItem('active-session-cache')
+    );
+
+    const activeCache = JSON.parse(
       localStorage.getItem('active-session-alive')
     );
+
+    if (callHistoryCache === null) {
+      this.callHistory = [];
+    } else {
+      this.callHistory = callHistoryCache;
+    }
+
+    if (activeCache === null) {
+      this.activeSession = {
+        isLoggedIn: false,
+        isSessionAlive: false,
+        userHash: '',
+        userName: '',
+      };
+    } else {
+      this.activeSession = activeCache;
+    }
+
     return this.callHistory.userCallHistory;
   }
 
@@ -69,7 +91,12 @@ class ActiveSessionManager {
 
     const isAlive: boolean = JSON.parse(
       localStorage.getItem('active-session-alive')
-    ).isSessionAlive;
+    );
+
+    if (isAlive === null) {
+      console.log("Session Information in Local Storage Doesn't Exist");
+      return false;
+    }
 
     return isAlive;
   }
@@ -82,12 +109,12 @@ class LocalSessionWorker {
   authenticate(credentials: Credentials) {
     let userCallHistory;
 
-    const master = {``
-      usersList: JSON.parse(localStorage.getItem('active-session-cache')),
+    const master = {
+      usersList: JSON.parse(localStorage.getItem('users')),
     };
 
     console.log('Gets the entire local database of users...');
-    console.log(master);
+    console.log(117, master);
 
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
@@ -104,7 +131,7 @@ class LocalSessionWorker {
 
     // This Section of Code Generates a temporary token with all the users
     if (val === credentials.password) {
-      userCallHistory = master.usersList[getUsernameHashValue].tch;
+      userCallHistory = ActiveSessionManager.callHistory;
 
       console.log(userCallHistory);
 
