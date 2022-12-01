@@ -1,8 +1,13 @@
-interface Server {
+import { SHA1, AES, enc } from 'crypto-js';
+
+interface Authenticate {
+  registerNewUser(): void;
+  authenticateUser(payload): void;
+}
+
+interface Server extends Authenticate {
   connect(): void;
   disconnect(): void;
-  registerNewUser(): void;
-  authenticateUser(): void;
 }
 
 interface Users {
@@ -10,7 +15,7 @@ interface Users {
 }
 
 // MARK: Local Storage Server for Testing Purposes
-class LocalStorageSimulationServer implements Server {
+class LocalStorageSimulationServer implements Authenticate {
   private database: Users;
 
   connect(): void {
@@ -25,8 +30,6 @@ class LocalStorageSimulationServer implements Server {
           'U2FsdGVkX19vteDGe4HPQtxPCj0vv/UwIoKd64Xq0u8=',
       };
 
-      console.log(this.database);
-
       localStorage.setItem('usersDB', JSON.stringify(this.database));
     } else {
       console.log('Connected to local storage database usersDB');
@@ -40,7 +43,26 @@ class LocalStorageSimulationServer implements Server {
 
   registerNewUser(): void {}
 
-  authenticateUser(): void {}
+  authenticateUser(payload): void {
+    // console.log(47, payload);
+
+    const { username, password } = payload;
+    const getUsernameHashValue = SHA1(username).toString();
+
+    let pass = this.database[getUsernameHashValue];
+
+    if (!pass) {
+      console.log('Return False user not found in database');
+    }
+
+    let isValidUser = AES.decrypt(pass, password).toString(enc.Utf8);
+
+    if (isValidUser === password) {
+      console.log('User authenticated and starting new session');
+    } else {
+      console.log('Wrong Password');
+    }
+  }
 }
 
 // MARK: External API Server
@@ -59,7 +81,7 @@ class ServerManagerController {
   public disconnect(): void {}
 
   public getServer(): Server {
-    return null;
+    return this.server;
   }
 }
 

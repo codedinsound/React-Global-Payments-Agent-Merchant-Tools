@@ -50,6 +50,8 @@ export default function App(props) {
   const loginIntoToolsHandler = (credentials: Credentials) => {
     console.log(loginIntoToolsHandler.name, 57, credentials); // <-------------------------------------- DEBUG LINE
 
+    server.getServer().authenticateUser(credentials);
+
     // const val = props.sessionManager.localSessionAuthenticate(credentials);
 
     // NOTE: Refactor Later if user is not properly authenticated then return false statement
