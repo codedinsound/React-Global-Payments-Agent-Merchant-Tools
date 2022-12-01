@@ -93,9 +93,12 @@ const MainToolsView = (props) => {
     navigator.clipboard.writeText(displayFields.dba);
   };
 
+  let userName = ActiveSessionManager.getActiveSession().userName;
+
   return (
     <div>
       <div className="navigation">
+        <div className="navigation-logo">User: {userName}</div>
         <button onClick={props.logOutOfToolsHandler}>Log Out</button>
       </div>
       <div className="top-display">
