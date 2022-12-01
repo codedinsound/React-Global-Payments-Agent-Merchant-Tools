@@ -24,11 +24,7 @@ interface Credentials {
 }
 
 export default function App(props) {
-  // TODO: CHECK FOR ANY ACTIVE SESSION AND UPDATE STATE IMMEDIATELY
-
   const isSessionAlive = ActiveSessionManager.checkForActiveSessions();
-
-  console.log(31, isSessionAlive);
 
   let token = null;
 

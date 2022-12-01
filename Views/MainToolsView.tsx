@@ -21,9 +21,8 @@ const MainToolsView = (props) => {
     updateMerchantHistory([...merchantHistory]);
 
     // Store Data into Local Storage
-    console.log(merchantHistory);
 
-    ActiveSessionManager.storeIntoActiveSessionCache();
+    ActiveSessionManager.storeIntoActiveSessionCache(displayFields);
   };
 
   const handleChange = (event) => {

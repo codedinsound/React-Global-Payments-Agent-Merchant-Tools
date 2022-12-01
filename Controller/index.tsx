@@ -16,22 +16,15 @@ class ActiveSessionManager {
   }
 
   // MARK: Store in to Local Storage Cache
-  static storeIntoActiveSessionCache() {
+  static storeIntoActiveSessionCache(newEntry) {
     const cachedCallHistory = JSON.parse(
       localStorage.getItem('active-session-cache')
     );
 
-    const newCache = {
-      ...cachedCallHistory,
-      ...this.callHistory,
-    };
-
-    localStorage.setItem('active-session-cache', JSON.stringify(newCache));
+    // localStorage.setItem('active-session-cache', JSON.stringify(newCache));
   }
 
   static createNewActiveSession(sessionParams) {
-    console.log('Creating new Session with Params');
-
     const aliveParams: Session = {
       isSessionAlive: true,
       isLoggedIn: true,
@@ -39,12 +32,8 @@ class ActiveSessionManager {
       userName: sessionParams.userName,
     };
 
-    const sessionCache = {
-      userCallHistory: sessionParams.userCallHistory,
-    };
-
     localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
-    localStorage.setItem('active-session-cache', JSON.stringify(sessionCache));
+    localStorage.setItem('active-session-cache', JSON.stringify([]));
   }
 
   static reestablisActiveSession() {
@@ -77,8 +66,6 @@ class ActiveSessionManager {
   }
 
   static endSession() {
-    console.log('ending session');
-
     const reset: Session = {
       isLoggedIn: false,
       isSessionAlive: false,
@@ -92,14 +79,11 @@ class ActiveSessionManager {
 
   // NOTE: Transform this into a live booleanic Value
   static checkForActiveSessions() {
-    console.log('Check if Session is Alive');
-
     const isAlive: boolean = JSON.parse(
       localStorage.getItem('active-session-alive')
     );
 
     if (isAlive === null) {
-      console.log("Session Information in Local Storage Doesn't Exist");
       return false;
     }
 
@@ -118,15 +102,9 @@ class LocalSessionWorker {
       usersList: JSON.parse(localStorage.getItem('users')),
     };
 
-    console.log('Gets the entire local database of users...');
-    console.log(117, master);
-
     const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    console.log(master);
-
     if (!master.usersList[getUsernameHashValue]) {
-      console.log('user not found....');
       return false;
     }
 
@@ -169,8 +147,6 @@ class LocalSessionWorker {
 
   // MARK: Register New Agents
   register(credentials: Credentials) {
-    console.log(credentials);
-
     const compared = credentials.password;
 
     credentials.password = AES.encrypt(
@@ -200,9 +176,9 @@ class SessionManager {
     this.localSessionWorker = new LocalSessionWorker();
   }
 
-  public localSessionRegister(credentals): void {
-    this.localSessionWorker.register(credentals);
-  }
+  // public localSessionRegister(credentals): void {
+  //   this.localSessionWorker.register(credentals);
+  // }
 
   public localSessionAuthenticate(credentials) {
     return this.localSessionWorker.authenticate(credentials);
@@ -210,17 +186,3 @@ class SessionManager {
 }
 
 export { SessionManager, ActiveSessionManager };
-
-// console.log(
-//   AES.decrypt(credentials.password, '123456A').toString(enc.Utf8)
-// );
-
-// const decryptedTest = AES.decrypt(credentials.password, '123456A').toString(
-//   enc.Utf8
-// );
-
-// if (credentials.username === decryptedTest) {
-//   console.log(true);
-// }
-
-// console.log('decrypted text: ', decryptedTest);

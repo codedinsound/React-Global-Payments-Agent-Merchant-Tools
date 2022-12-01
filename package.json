@@ -5,15 +5,15 @@
   "dependencies": {
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "crypto-js": "4.1.1",
     "moment": "2.29.4",
     "moment-timezone": "0.5.39",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-live-clock": "6.0.7",
+    "react-live-clock": "^6.1.0",
     "react-moment": "1.1.2",
-    "react-router-dom": "^6.4.3",
-    "crypto-js": "*"
+    "react-router-dom": "6.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
