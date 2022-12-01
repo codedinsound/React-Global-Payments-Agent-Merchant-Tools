@@ -1,15 +1,11 @@
 import { SHA1, AES, enc } from 'crypto-js';
-
 import { Session } from '../Model';
-
-interface Credentials {
-  username: string;
-  password: string;
-}
 
 class ActiveSessionManager {
   static callHistory;
   static activeSession: Session;
+
+  constructor() {}
 
   static getActiveSession(): Session {
     return this.activeSession;
@@ -93,96 +89,107 @@ class ActiveSessionManager {
 
 // For Simulating a Database Using Local Storage Actual Authentication Goes
 // Deeper than that with utilizing a server and database respectively.
-class LocalSessionWorker {
-  // Auth
-  authenticate(credentials: Credentials) {
-    let userCallHistory;
+// class LocalSessionWorker {
+//   // Auth
+//   authenticate(credentials: Credentials) {
+//     let userCallHistory;
 
-    const master = {
-      usersList: JSON.parse(localStorage.getItem('users')),
-    };
+//     const master = {
+//       usersList: JSON.parse(localStorage.getItem('users')),
+//     };
 
-    const getUsernameHashValue = SHA1(credentials.username).toString();
+//     const getUsernameHashValue = SHA1(credentials.username).toString();
 
-    if (!master.usersList[getUsernameHashValue]) {
-      return false;
-    }
+//     if (!master.usersList[getUsernameHashValue]) {
+//       return false;
+//     }
 
-    // Compares the password provided with the one from local database
-    const val = AES.decrypt(
-      master.usersList[getUsernameHashValue].p,
-      credentials.password
-    ).toString(enc.Utf8);
+//     // Compares the password provided with the one from local database
+//     const val = AES.decrypt(
+//       master.usersList[getUsernameHashValue].p,
+//       credentials.password
+//     ).toString(enc.Utf8);
 
-    // This Section of Code Generates a temporary token with all the users
-    if (val === credentials.password) {
-      userCallHistory = ActiveSessionManager.callHistory;
+//     // This Section of Code Generates a temporary token with all the users
+//     if (val === credentials.password) {
+//       userCallHistory = ActiveSessionManager.callHistory;
 
-      console.log(138, ActiveSessionManager.callHistory); // <---------------------------------------------------------- DEUBGGER
+//       console.log(138, ActiveSessionManager.callHistory); // <---------------------------------------------------------- DEUBGGER
 
-      // // Create an active live session
-      // console.log(credentials.username);
+//       // // Create an active live session
+//       // console.log(credentials.username);
 
-      const sessionParams = {
-        userHash: getUsernameHashValue,
-        userName: credentials.username,
-        userCallHistory: [],
-      };
+//       const sessionParams = {
+//         userHash: getUsernameHashValue,
+//         userName: credentials.username,
+//         userCallHistory: [],
+//       };
 
-      console.log(150, sessionParams); // <---------------------------------------------------------- DEUBGGER
+//       console.log(150, sessionParams); // <---------------------------------------------------------- DEUBGGER
 
-      ActiveSessionManager.createNewActiveSession(sessionParams);
+//       ActiveSessionManager.createNewActiveSession(sessionParams);
 
-      return {
-        user: getUsernameHashValue,
-        userCallHistory: [],
-      };
-    }
+//       return {
+//         user: getUsernameHashValue,
+//         userCallHistory: [],
+//       };
+//     }
 
-    console.log('Wrong Password');
-    delete master.usersList;
+//     console.log('Wrong Password');
+//     delete master.usersList;
 
-    return false;
-  }
+//     return false;
+//   }
 
-  // MARK: Register New Agents
-  register(credentials: Credentials) {
-    const compared = credentials.password;
+// MARK: Register New Agents
+// register(credentials: Credentials) {
+//   const compared = credentials.password;
 
-    credentials.password = AES.encrypt(
-      credentials.password,
-      credentials.password
-    ).toString();
+//   credentials.password = AES.encrypt(
+//     credentials.password,
+//     credentials.password
+//   ).toString();
 
-    const hash = SHA1(credentials.username).toString();
-    credentials.username = hash;
+//   const hash = SHA1(credentials.username).toString();
+//   credentials.username = hash;
 
-    const users = JSON.parse(localStorage.getItem('users'));
+//   const users = JSON.parse(localStorage.getItem('users'));
 
-    users[credentials.username] = {
-      p: credentials.password,
-      tch: [],
-    };
+//   users[credentials.username] = {
+//     p: credentials.password,
+//     tch: [],
+//   };
 
-    // Register the User
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-}
+//   // Register the User
+//   localStorage.setItem('users', JSON.stringify(users));
+// }
+// }
 
-class SessionManager {
-  private localSessionWorker: LocalSessionWorker;
+// class SessionManager {
+//   private localSessionWorker: LocalSessionWorker;
 
-  constructor() {
-    this.localSessionWorker = new LocalSessionWorker();
-  }
+//   constructor() {
+//     this.localSessionWorker = new LocalSessionWorker();
+//   }
 
-  // public localSessionRegister(credentals): void {
-  //   this.localSessionWorker.register(credentals);
-  // }
+//   // public localSessionRegister(credentals): void {
+//   //   this.localSessionWorker.register(credentals);
+//   // }
 
-  public localSessionAuthenticate(credentials) {
-    return this.localSessionWorker.authenticate(credentials);
-  }
-}
+//   public localSessionAuthenticate(credentials) {
+//     return this.localSessionWorker.authenticate(credentials);
+//   }
+// }
 
-export { SessionManager, ActiveSessionManager };
+import {
+  Server,
+  LocalStorageSimulationServer,
+  ServerManagerController,
+} from './ServerManager';
+
+export {
+  Server,
+  LocalStorageSimulationServer,
+  ServerManagerController,
+  ActiveSessionManager,
+};

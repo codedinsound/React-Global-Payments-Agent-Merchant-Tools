@@ -11,22 +11,28 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
-import { ActiveSessionManager } from '../Controller';
+import {
+  ActiveSessionManager,
+  LocalStorageSimulationServer,
+  ServerManagerController,
+} from '../Controller';
+import { Credentials } from '../Model';
+
+// ESTABLISH SERVER CONNECTION
+// ----------------------------------------------------
+const server = new ServerManagerController(new LocalStorageSimulationServer());
+server.connect();
+// -----------------------------------------------------
 
 const Protected = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) return <Navigate to="/" replace />;
   return children;
 };
 
-interface Credentials {
-  username: string;
-  password: string;
-}
-
 export default function App(props) {
-  const isSessionAlive = ActiveSessionManager.checkForActiveSessions();
+  let token, isSessionAlive;
 
-  let token = null;
+  isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
   if (isSessionAlive) {
     ActiveSessionManager.reestablisActiveSession();
@@ -41,27 +47,21 @@ export default function App(props) {
   const [tokenization, updateToken] = useState(token);
 
   // FUNCTION
-  const loginIntoToolsHandler = (e) => {
-    const [username, password] = e.target;
-
-    const credentials: Credentials = {
-      username: username.value,
-      password: password.value,
-    };
-
+  const loginIntoToolsHandler = (credentials: Credentials) => {
     console.log(loginIntoToolsHandler.name, 57, credentials); // <-------------------------------------- DEBUG LINE
-    const val = props.sessionManager.localSessionAuthenticate(credentials);
+
+    // const val = props.sessionManager.localSessionAuthenticate(credentials);
 
     // NOTE: Refactor Later if user is not properly authenticated then return false statement
-    if (!val) return false;
+    // if (!val) return false;
 
-    updateToken({
-      loggedIn: true,
-      user: val.user,
-      callHistory: val.userCallHistory,
-    });
+    // updateToken({
+    //   loggedIn: true,
+    //   user: val.user,
+    //   callHistory: val.userCallHistory,
+    // });
 
-    return true;
+    // return true;
   };
 
   // MARK: Log Out of the Screen
@@ -78,6 +78,8 @@ export default function App(props) {
 
   let isLoggedIn = tokenization ? tokenization.loggedIn : false;
 
+  isLoggedIn = false;
+
   return (
     <React.Fragment>
       <Router>
@@ -88,7 +90,6 @@ export default function App(props) {
               <LoginForm
                 isLoggedIn={isLoggedIn}
                 loginIntoToolsHandler={loginIntoToolsHandler}
-                sessionManager={props.sessionManager}
               />
             }
           />

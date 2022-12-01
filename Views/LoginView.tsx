@@ -1,22 +1,29 @@
 import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Credentials } from '../Model';
 
-const LoginForm = (props) => {
+const LoginForm = ({ isLoggedIn, loginIntoToolsHandler }) => {
+  if (isLoggedIn) return <Navigate to="/tools" />;
+
   const navigate = useNavigate();
-
-  if (props.isLoggedIn) return <Navigate to="/tools" />;
 
   const loginSubmissionHandler = (e) => {
     e.preventDefault();
-    console.log(loginSubmissionHandler.name, 12, 'fired');
 
-    const navigateNext = props.loginIntoToolsHandler(e);
+    console.log('Login Pushed', e.target.username.value);
 
-    if (navigateNext) {
-      navigate('/tools');
-    } else {
-      navigate('/');
-    }
+    const credentials: Credentials = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+
+    const navigateNext = loginIntoToolsHandler(credentials);
+
+    // if (navigateNext) {
+    //   navigate('/tools');
+    // } else {
+    //   navigate('/');
+    // }
   };
 
   return (
