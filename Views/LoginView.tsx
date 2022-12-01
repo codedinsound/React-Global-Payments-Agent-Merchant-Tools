@@ -10,8 +10,6 @@ const LoginForm = ({ isLoggedIn, loginIntoToolsHandler }) => {
   const loginSubmissionHandler = (e) => {
     e.preventDefault();
 
-    console.log('Login Pushed', e.target.username.value);
-
     const credentials: Credentials = {
       username: e.target.username.value,
       password: e.target.password.value,

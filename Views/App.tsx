@@ -32,6 +32,8 @@ const Protected = ({ isLoggedIn, children }) => {
 export default function App(props) {
   let token, isSessionAlive;
 
+  let session;
+
   isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
   if (isSessionAlive) {
@@ -44,18 +46,18 @@ export default function App(props) {
     };
   }
 
-  const [tokenization, updateToken] = useState(token);
+  const [tokenization, updateToken] = useState(session);
+
+  const [sessionToken, updateSessionToken] = useState(session);
 
   // FUNCTION
   const loginIntoToolsHandler = (credentials: Credentials) => {
-    console.log(loginIntoToolsHandler.name, 57, credentials); // <-------------------------------------- DEBUG LINE
-
     server.getServer().authenticateUser(credentials);
 
-    // const val = props.sessionManager.localSessionAuthenticate(credentials);
-
-    // NOTE: Refactor Later if user is not properly authenticated then return false statement
     // if (!val) return false;
+
+
+
 
     // updateToken({
     //   loggedIn: true,

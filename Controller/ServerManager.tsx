@@ -1,4 +1,5 @@
 import { SHA1, AES, enc } from 'crypto-js';
+import ActiveSessionManager from '../Controller/ActiveSessionManager';
 
 interface Authenticate {
   registerNewUser(): void;
@@ -59,6 +60,12 @@ class LocalStorageSimulationServer implements Authenticate {
 
     if (isValidUser === password) {
       console.log('User authenticated and starting new session');
+
+      // TODO: Initiliaze a New Active Session
+      ActiveSessionManager.startANewActiveSession(
+        getUsernameHashValue,
+        username
+      );
     } else {
       console.log('Wrong Password');
     }
