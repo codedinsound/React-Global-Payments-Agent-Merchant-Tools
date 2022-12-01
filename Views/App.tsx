@@ -24,31 +24,22 @@ const server = new ServerManagerController(new LocalStorageSimulationServer());
 server.connect();
 // -----------------------------------------------------
 
-const Protected = ({ isLoggedIn, children }) => {
-  if (!isLoggedIn) return <Navigate to="/" replace />;
+const Protected = ({ children }) => {
+  if (!ActiveSessionManager.isSessionAlive())
+    return <Navigate to="/" replace />;
   return children;
 };
 
 export default function App(props) {
-  let token, isSessionAlive;
+  // Check if There is an Active Session
 
-  let session;
+  ActiveSessionManager.restablishSession();
 
-  // isSessionAlive = ActiveSessionManager.checkForActiveSessions();
+  const [sessionToken, updateSessionToken] = useState(
+    ActiveSessionManager.getActiveSession()
+  );
 
-  if (isSessionAlive) {
-    // ActiveSessionManager.reestablisActiveSession();
-
-    token = {
-      // loggedIn: ActiveSessionManager.getActiveSession().isLoggedIn,
-      // userName: ActiveSessionManager.getActiveSession().userName,
-      // callHistory: ActiveSessionManager.reestablisActiveSession(),
-    };
-  }
-
-  const [tokenization, updateToken] = useState(session);
-
-  const [sessionToken, updateSessionToken] = useState(session);
+  console.log(sessionToken);
 
   // FUNCTION
   const loginIntoToolsHandler = (credentials: Credentials) => {
@@ -64,18 +55,7 @@ export default function App(props) {
   // MARK: Log Out of the Screen
   const logOutOfToolsHandler = (e) => {
     console.log('Logging Out....');
-    updateToken({
-      loggedIn: false,
-      user: '',
-      callHistory: null,
-    });
-
-    // ActiveSessionManager.endSession();
   };
-
-  let isLoggedIn = tokenization ? tokenization.loggedIn : false;
-
-  isLoggedIn = false;
 
   return (
     <React.Fragment>
@@ -90,11 +70,12 @@ export default function App(props) {
           <Route
             path="/tools"
             element={
-              <Protected isLoggedIn={isLoggedIn}>
+              <Protected>
                 <MainToolsView
-                  callHistory={isLoggedIn ? tokenization.callHistory : null}
-                  user={isLoggedIn ? tokenization.user : null}
-                  logOut={isLoggedIn ? logOutOfToolsHandler : null}
+                  userCallHistory={
+                    sessionToken !== null ? sessionToken.userCallHistory : null
+                  }
+                  logOut={null}
                 />
               </Protected>
             }

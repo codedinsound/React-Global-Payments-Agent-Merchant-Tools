@@ -18,11 +18,21 @@ class ActiveSessionManager {
   }
 
   static isSessionAlive(): boolean {
-    return this.activeSession !== null && this.activeSession.isSessionAlive;
+    if (!this.activeSession) return false;
+    return this.activeSession.isSessionAlive;
   }
 
   static getActiveSession(): Session {
     return this.activeSession;
+  }
+
+  static restablishSession() {
+    console.log('Checking if there is an active session in local storage');
+    const sesh = JSON.parse(localStorage.getItem('active-session-alive'));
+
+    if (sesh && sesh.isSessionAlive) {
+      this.activeSession = sesh;
+    }
   }
 }
 

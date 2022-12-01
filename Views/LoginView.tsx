@@ -4,7 +4,7 @@ import { ActiveSessionManager } from '../Controller';
 import { Credentials } from '../Model';
 
 const LoginForm = ({ loginIntoToolsHandler }) => {
-  // if (ActiveSessionManager.isSessionAlive()) return <Navigate to="/tools" />;
+  if (ActiveSessionManager.isSessionAlive()) return <Navigate to="/tools" />;
 
   const navigate = useNavigate();
 
@@ -18,11 +18,13 @@ const LoginForm = ({ loginIntoToolsHandler }) => {
 
     const navigateNext = loginIntoToolsHandler(credentials);
 
-    // if (navigateNext) {
-    //   navigate('/tools');
-    // } else {
-    //   navigate('/');
-    // }
+    console.log(22, navigateNext);
+
+    if (navigateNext) {
+      navigate('/tools');
+    } else {
+      navigate('/');
+    }
   };
 
   return (

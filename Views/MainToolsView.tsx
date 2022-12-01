@@ -6,7 +6,11 @@ import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
 const MainToolsView = (props) => {
-  const [merchantHistory, updateMerchantHistory] = useState(props.callHistory);
+  console.log(props);
+
+  const [merchantHistory, updateMerchantHistory] = useState(
+    props.userCallHistory
+  );
   const [changeColor, updateClass] = useState('');
   const [displayFields, updateDisplay] = useState(
     Utils.generateNewDisplayFieldObject()
@@ -22,7 +26,7 @@ const MainToolsView = (props) => {
 
     // Store Data into Local Storage
 
-    ActiveSessionManager.storeIntoActiveSessionCache(displayFields);
+    // ActiveSessionManager.storeIntoActiveSessionCache(displayFields);
   };
 
   const handleChange = (event) => {
