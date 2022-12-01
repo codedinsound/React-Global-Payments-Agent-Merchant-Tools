@@ -6,8 +6,6 @@ import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
 const MainToolsView = (props) => {
-  console.log(props);
-
   const [merchantHistory, updateMerchantHistory] = useState(
     props.userCallHistory
   );
@@ -19,14 +17,18 @@ const MainToolsView = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
-    // navigator.clipboard.writeText(output);
-    // updateDisplay(Utils.generateNewDisplayFieldObject());
-    // merchantHistory.push(displayFields);
-    // updateMerchantHistory([...merchantHistory]);
+    navigator.clipboard.writeText(output);
+    updateDisplay(Utils.generateNewDisplayFieldObject());
+    merchantHistory.push(displayFields);
+    updateMerchantHistory([...merchantHistory]);
 
-    // Store Data into Local Storage
+    ActiveSessionManager.getActiveSession().userCallHistory = [
+      ...merchantHistory,
+    ];
 
-    // ActiveSessionManager.storeIntoActiveSessionCache(displayFields);
+    console.log(31, ActiveSessionManager.getActiveSession().userCallHistory);
+
+    ActiveSessionManager.updateActiveUserCallHistoryInLocalStore();
   };
 
   const handleChange = (event) => {

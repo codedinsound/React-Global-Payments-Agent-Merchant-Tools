@@ -17,6 +17,13 @@ class ActiveSessionManager {
     );
   }
 
+  static updateActiveUserCallHistoryInLocalStore() {
+    localStorage.setItem(
+      'active-session-alive',
+      JSON.stringify(this.activeSession)
+    );
+  }
+
   static isSessionAlive(): boolean {
     if (!this.activeSession) return false;
     return this.activeSession.isSessionAlive;
@@ -26,13 +33,27 @@ class ActiveSessionManager {
     return this.activeSession;
   }
 
-  static restablishSession() {
+  static restablishSession(): void {
     console.log('Checking if there is an active session in local storage');
     const sesh = JSON.parse(localStorage.getItem('active-session-alive'));
 
     if (sesh && sesh.isSessionAlive) {
       this.activeSession = sesh;
     }
+  }
+
+  static endActiveSession(): void {
+    this.activeSession = {
+      isSessionAlive: false,
+      userHash: '',
+      userName: '',
+      userCallHistory: [],
+    };
+
+    localStorage.setItem(
+      'active-session-alive',
+      JSON.stringify(this.activeSession)
+    );
   }
 }
 

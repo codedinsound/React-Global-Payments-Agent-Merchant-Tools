@@ -57,6 +57,8 @@ export default function App(props) {
   // MARK: Log Out of the Screen
   const logOutOfToolsHandler = (e) => {
     console.log('Logging Out....');
+    ActiveSessionManager.endActiveSession();
+    updateSessionToken(null);
   };
 
   return (

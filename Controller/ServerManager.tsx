@@ -45,8 +45,6 @@ class LocalStorageSimulationServer implements Authenticate {
   registerNewUser(): void {}
 
   authenticateUser(payload): void {
-    // console.log(47, payload);
-
     const { username, password } = payload;
     const getUsernameHashValue = SHA1(username).toString();
 
