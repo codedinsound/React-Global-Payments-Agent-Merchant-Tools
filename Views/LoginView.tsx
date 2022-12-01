@@ -1,9 +1,10 @@
 import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { ActiveSessionManager } from '../Controller';
 import { Credentials } from '../Model';
 
-const LoginForm = ({ isLoggedIn, loginIntoToolsHandler }) => {
-  if (isLoggedIn) return <Navigate to="/tools" />;
+const LoginForm = ({ loginIntoToolsHandler }) => {
+  // if (ActiveSessionManager.isSessionAlive()) return <Navigate to="/tools" />;
 
   const navigate = useNavigate();
 

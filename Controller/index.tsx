@@ -1,91 +1,91 @@
 import { SHA1, AES, enc } from 'crypto-js';
-import { Session } from '../Model';
+import ActiveSessionManager from './ActiveSessionManager';
 
-class ActiveSessionManager {
-  static callHistory;
-  static activeSession: Session;
+// class ActiveSessionManager {
+//   static callHistory;
+//   static activeSession: Session;
 
-  constructor() {}
+//   constructor() {}
 
-  static getActiveSession(): Session {
-    return this.activeSession;
-  }
+//   static getActiveSession(): Session {
+//     return this.activeSession;
+//   }
 
-  // MARK: Store in to Local Storage Cache
-  static storeIntoActiveSessionCache(newEntry) {
-    const cachedCallHistory = JSON.parse(
-      localStorage.getItem('active-session-cache')
-    );
+//   // MARK: Store in to Local Storage Cache
+//   static storeIntoActiveSessionCache(newEntry) {
+//     const cachedCallHistory = JSON.parse(
+//       localStorage.getItem('active-session-cache')
+//     );
 
-    // localStorage.setItem('active-session-cache', JSON.stringify(newCache));
-  }
+//     // localStorage.setItem('active-session-cache', JSON.stringify(newCache));
+//   }
 
-  static createNewActiveSession(sessionParams) {
-    const aliveParams: Session = {
-      isSessionAlive: true,
-      isLoggedIn: true,
-      userHash: sessionParams.userHash,
-      userName: sessionParams.userName,
-    };
+//   static createNewActiveSession(sessionParams) {
+//     const aliveParams: Session = {
+//       isSessionAlive: true,
+//       isLoggedIn: true,
+//       userHash: sessionParams.userHash,
+//       userName: sessionParams.userName,
+//     };
 
-    localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
-    localStorage.setItem('active-session-cache', JSON.stringify([]));
-  }
+//     localStorage.setItem('active-session-alive', JSON.stringify(aliveParams));
+//     localStorage.setItem('active-session-cache', JSON.stringify([]));
+//   }
 
-  static reestablisActiveSession() {
-    const callHistoryCache = JSON.parse(
-      localStorage.getItem('active-session-cache')
-    );
+//   static reestablisActiveSession() {
+//     const callHistoryCache = JSON.parse(
+//       localStorage.getItem('active-session-cache')
+//     );
 
-    const activeCache = JSON.parse(
-      localStorage.getItem('active-session-alive')
-    );
+//     const activeCache = JSON.parse(
+//       localStorage.getItem('active-session-alive')
+//     );
 
-    if (callHistoryCache === null) {
-      this.callHistory = [];
-    } else {
-      this.callHistory = callHistoryCache;
-    }
+//     if (callHistoryCache === null) {
+//       this.callHistory = [];
+//     } else {
+//       this.callHistory = callHistoryCache;
+//     }
 
-    if (activeCache === null) {
-      this.activeSession = {
-        isLoggedIn: false,
-        isSessionAlive: false,
-        userHash: '',
-        userName: '',
-      };
-    } else {
-      this.activeSession = activeCache;
-    }
+//     if (activeCache === null) {
+//       this.activeSession = {
+//         isLoggedIn: false,
+//         isSessionAlive: false,
+//         userHash: '',
+//         userName: '',
+//       };
+//     } else {
+//       this.activeSession = activeCache;
+//     }
 
-    return this.callHistory.userCallHistory;
-  }
+//     return this.callHistory.userCallHistory;
+//   }
 
-  static endSession() {
-    const reset: Session = {
-      isLoggedIn: false,
-      isSessionAlive: false,
-      userHash: '',
-      userName: '',
-    };
+//   static endSession() {
+//     const reset: Session = {
+//       isLoggedIn: false,
+//       isSessionAlive: false,
+//       userHash: '',
+//       userName: '',
+//     };
 
-    localStorage.setItem('active-session-alive', JSON.stringify(reset));
-    localStorage.setItem('active-session-cache', JSON.stringify([]));
-  }
+//     localStorage.setItem('active-session-alive', JSON.stringify(reset));
+//     localStorage.setItem('active-session-cache', JSON.stringify([]));
+//   }
 
-  // NOTE: Transform this into a live booleanic Value
-  static checkForActiveSessions() {
-    const isAlive: boolean = JSON.parse(
-      localStorage.getItem('active-session-alive')
-    );
+//   // NOTE: Transform this into a live booleanic Value
+//   static checkForActiveSessions() {
+//     const isAlive: boolean = JSON.parse(
+//       localStorage.getItem('active-session-alive')
+//     );
 
-    if (isAlive === null) {
-      return false;
-    }
+//     if (isAlive === null) {
+//       return false;
+//     }
 
-    return isAlive;
-  }
-}
+//     return isAlive;
+//   }
+// }
 
 // For Simulating a Database Using Local Storage Actual Authentication Goes
 // Deeper than that with utilizing a server and database respectively.

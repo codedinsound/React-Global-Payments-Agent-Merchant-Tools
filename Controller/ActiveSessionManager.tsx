@@ -18,7 +18,11 @@ class ActiveSessionManager {
   }
 
   static isSessionAlive(): boolean {
-    return true;
+    return this.activeSession !== null && this.activeSession.isSessionAlive;
+  }
+
+  static getActiveSession(): Session {
+    return this.activeSession;
   }
 }
 

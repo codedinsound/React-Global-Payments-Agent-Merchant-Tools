@@ -34,15 +34,15 @@ export default function App(props) {
 
   let session;
 
-  isSessionAlive = ActiveSessionManager.checkForActiveSessions();
+  // isSessionAlive = ActiveSessionManager.checkForActiveSessions();
 
   if (isSessionAlive) {
-    ActiveSessionManager.reestablisActiveSession();
+    // ActiveSessionManager.reestablisActiveSession();
 
     token = {
-      loggedIn: ActiveSessionManager.getActiveSession().isLoggedIn,
-      userName: ActiveSessionManager.getActiveSession().userName,
-      callHistory: ActiveSessionManager.reestablisActiveSession(),
+      // loggedIn: ActiveSessionManager.getActiveSession().isLoggedIn,
+      // userName: ActiveSessionManager.getActiveSession().userName,
+      // callHistory: ActiveSessionManager.reestablisActiveSession(),
     };
   }
 
@@ -54,18 +54,11 @@ export default function App(props) {
   const loginIntoToolsHandler = (credentials: Credentials) => {
     server.getServer().authenticateUser(credentials);
 
-    // if (!val) return false;
+    if (!ActiveSessionManager.isSessionAlive()) return false;
 
+    updateSessionToken(ActiveSessionManager.getActiveSession());
 
-
-
-    // updateToken({
-    //   loggedIn: true,
-    //   user: val.user,
-    //   callHistory: val.userCallHistory,
-    // });
-
-    // return true;
+    return true;
   };
 
   // MARK: Log Out of the Screen
@@ -77,7 +70,7 @@ export default function App(props) {
       callHistory: null,
     });
 
-    ActiveSessionManager.endSession();
+    // ActiveSessionManager.endSession();
   };
 
   let isLoggedIn = tokenization ? tokenization.loggedIn : false;
@@ -91,10 +84,7 @@ export default function App(props) {
           <Route
             path="/"
             element={
-              <LoginForm
-                isLoggedIn={isLoggedIn}
-                loginIntoToolsHandler={loginIntoToolsHandler}
-              />
+              <LoginForm loginIntoToolsHandler={loginIntoToolsHandler} />
             }
           />
           <Route
