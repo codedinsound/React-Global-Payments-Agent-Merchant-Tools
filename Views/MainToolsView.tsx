@@ -19,10 +19,10 @@ const MainToolsView = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
-    navigator.clipboard.writeText(output);
-    updateDisplay(Utils.generateNewDisplayFieldObject());
-    merchantHistory.push(displayFields);
-    updateMerchantHistory([...merchantHistory]);
+    // navigator.clipboard.writeText(output);
+    // updateDisplay(Utils.generateNewDisplayFieldObject());
+    // merchantHistory.push(displayFields);
+    // updateMerchantHistory([...merchantHistory]);
 
     // Store Data into Local Storage
 
@@ -91,14 +91,10 @@ const MainToolsView = (props) => {
     navigator.clipboard.writeText(displayFields.dba);
   };
 
-  const handleLoggingOut = () => {
-    props.logOut();
-  };
-
   return (
     <div>
       <div className="navigation">
-        <button onClick={handleLoggingOut}>Log Out</button>
+        <button onClick={props.logOutOfToolsHandler}>Log Out</button>
       </div>
       <div className="top-display">
         <h1>Caller Info</h1>

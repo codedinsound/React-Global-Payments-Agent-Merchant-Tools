@@ -36,7 +36,9 @@ export default function App(props) {
   ActiveSessionManager.restablishSession();
 
   const [sessionToken, updateSessionToken] = useState(
-    ActiveSessionManager.getActiveSession()
+    ActiveSessionManager.isSessionAlive()
+      ? ActiveSessionManager.getActiveSession()
+      : null
   );
 
   console.log(sessionToken);
@@ -75,7 +77,7 @@ export default function App(props) {
                   userCallHistory={
                     sessionToken !== null ? sessionToken.userCallHistory : null
                   }
-                  logOut={null}
+                  logOutOfToolsHandler={logOutOfToolsHandler}
                 />
               </Protected>
             }
