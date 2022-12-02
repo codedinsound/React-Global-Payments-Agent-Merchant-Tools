@@ -34,7 +34,7 @@ body {
 .field-clock {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 5px;
 }
 

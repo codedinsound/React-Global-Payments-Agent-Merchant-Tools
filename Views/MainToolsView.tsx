@@ -112,6 +112,9 @@ const MainToolsView = (props) => {
         <h3>SV: {displayFields.sv}</h3>
         <h3>Reason for Call: {displayFields.callerReason}</h3>
         <div className="field-clock">
+          <div className="field-clock-calls">
+            Number of calls made: {merchantHistory.length}
+          </div>
           <div>
             Time:{' '}
             <Clock
