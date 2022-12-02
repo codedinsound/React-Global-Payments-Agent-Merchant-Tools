@@ -34,6 +34,11 @@ const prefilledResponses = [
     option: 'Transferred to GPI',
     filled_reason: 'Transferred to GPI',
   },
+  {
+    option: 'Terminal Comm Error',
+    filled_reason:
+      'Helped merchant troubleshoot terminal due to communication error',
+  },
 ];
 
 export default prefilledResponses;
