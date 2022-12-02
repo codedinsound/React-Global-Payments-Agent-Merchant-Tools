@@ -233,7 +233,7 @@ const MainToolsView = (props) => {
           <div className="controls-options-history">
             {' '}
             <select
-              size={10}
+              size={15}
               name="history_options"
               id="history_options"
               onChange={(event) => {
