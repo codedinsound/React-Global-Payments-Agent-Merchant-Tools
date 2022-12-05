@@ -39,6 +39,10 @@ const prefilledResponses = [
     filled_reason:
       'Helped merchant troubleshoot terminal due to communication error',
   },
+  {
+    option: 'Settlement Failed Batch Corrupted',
+    filled_reason: 'Batch not settling on the terminal due to RB error. Helped merchant with deleting the batch.'
+  }
 ];
 
 export default prefilledResponses;
