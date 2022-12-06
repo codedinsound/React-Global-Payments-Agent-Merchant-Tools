@@ -183,6 +183,11 @@ form {
   height: 25%;
 }
 
+.btn-controls-divider {
+  border: 1px dotted #fff;
+  margin: 1rem;
+}
+
 .btn-controls button {
   margin-bottom: 10px;
 }

@@ -103,6 +103,10 @@ const MainToolsView = (props) => {
     navigator.clipboard.writeText(displayFields.dba);
   };
 
+  const copyReasonToClipboard = () => {
+    navigator.clipboard.writeText(displayFields.callerReason);
+  };
+
   let userName = ActiveSessionManager.getActiveSession().userName;
 
   return (
@@ -280,6 +284,8 @@ const MainToolsView = (props) => {
         <div className="btn-controls">
           <button onClick={copyMIDToClipBoard}>Copy MID</button>
           <button onClick={copyDBAToClipboard}>Copy DBA</button>
+          <button onClick={copyReasonToClipboard}>Copy Reason</button>
+          <div className="btn-controls-divider"></div>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
         </div>
