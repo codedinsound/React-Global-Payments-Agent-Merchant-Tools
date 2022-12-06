@@ -41,8 +41,14 @@ const prefilledResponses = [
   },
   {
     option: 'Settlement Failed Batch Corrupted',
-    filled_reason: 'Batch not settling on the terminal due to RB error. Helped merchant with deleting the batch.'
-  }
+    filled_reason:
+      'Batch not settling on the terminal due to RB error. Helped merchant with deleting the batch.',
+  },
+  {
+    option: 'Confirm Transaction',
+    filled_reason:
+      'Needs credit card confirmation to see if the transaction ran through. For the date:',
+  },
 ];
 
 export default prefilledResponses;
