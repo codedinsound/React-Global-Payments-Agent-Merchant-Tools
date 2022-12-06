@@ -184,8 +184,8 @@ form {
 }
 
 .btn-controls-divider {
-  border: 1px dotted #fff;
-  margin: 1rem;
+  border: 2px dotted #fff;
+  margin-bottom: 1rem;
 }
 
 .btn-controls button {
