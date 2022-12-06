@@ -14,6 +14,9 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
+  // MARK: Radio Buttons State
+  const [selected, setSelected] = useState('Could Not Verify');
+
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
@@ -21,6 +24,8 @@ const MainToolsView = (props) => {
     updateDisplay(Utils.generateNewDisplayFieldObject());
     merchantHistory.push(displayFields);
     updateMerchantHistory([...merchantHistory]);
+
+    setSelected('Could Not Verify');
 
     ActiveSessionManager.getActiveSession().userCallHistory = [
       ...merchantHistory,
@@ -43,6 +48,11 @@ const MainToolsView = (props) => {
     const newObj = {
       ...displayFields,
     };
+
+    if (field === 'sv') {
+      console.log(event.target.value);
+      setSelected(event.target.value);
+    }
 
     newObj[field] = event.target.value;
     updateDisplay(newObj);
@@ -170,6 +180,7 @@ const MainToolsView = (props) => {
               id="sv"
               name="confirmation"
               onChange={handleChange}
+              checked={selected === 'Could Not Verify'}
             />{' '}
             Could Not Verify
             <input
@@ -178,6 +189,7 @@ const MainToolsView = (props) => {
               id="sv"
               name="confirmation"
               onChange={handleChange}
+              checked={selected === 'DBA Confirmed'}
             />{' '}
             DBA Confirmed
             <input
@@ -186,6 +198,7 @@ const MainToolsView = (props) => {
               name="confirmation"
               id="sv"
               onChange={handleChange}
+              checked={selected === 'Bank Account'}
             />{' '}
             Bank Account
             <input
@@ -194,6 +207,7 @@ const MainToolsView = (props) => {
               id="sv"
               name="confirmation"
               onChange={handleChange}
+              checked={selected === 'SSN'}
             />{' '}
             SSN
             <input
@@ -202,6 +216,7 @@ const MainToolsView = (props) => {
               id="sv"
               name="confirmation"
               onChange={handleChange}
+              checked={selected === 'PSS ISO Confirmed'}
             />{' '}
             ISO Confirmed
           </div>
