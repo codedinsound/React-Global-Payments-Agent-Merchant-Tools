@@ -15,7 +15,7 @@ const MainToolsView = (props) => {
   );
 
   // MARK: Radio Buttons State
-  const [selected, setSelected] = useState('Could Not Verify');
+  const [selected, setSelected] = useState('DBA Confirmed');
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ const MainToolsView = (props) => {
     merchantHistory.push(displayFields);
     updateMerchantHistory([...merchantHistory]);
 
-    setSelected('Could Not Verify');
+    setSelected('DBA Confirmed');
 
     ActiveSessionManager.getActiveSession().userCallHistory = [
       ...merchantHistory,
