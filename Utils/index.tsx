@@ -5,7 +5,7 @@ class Utils {
     const obj: DisplayObject = {
       mid: '',
       dba: '',
-      sv: 'Could Not Verify',
+      sv: 'DBA Confirmed',
       callerName: '',
       callerTitle: '',
       callerReason: '',
