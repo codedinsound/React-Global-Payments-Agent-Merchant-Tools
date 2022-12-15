@@ -1,5 +1,9 @@
 const prefilledResponses = [
   {
+    option: '',
+    filled_reason: '',
+  },
+  {
     option: 'Merchant Center Reset',
     filled_reason: 'Needed merchant user credentials reset for user: ',
   },

@@ -14,6 +14,9 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
+  // MARK: Selected PreWritten Response
+  const [selectedOption, updateSelectedOption] = useState('');
+
   // MARK: Radio Buttons State
   const [selected, setSelected] = useState('DBA Confirmed');
 
@@ -30,6 +33,8 @@ const MainToolsView = (props) => {
     ActiveSessionManager.getActiveSession().userCallHistory = [
       ...merchantHistory,
     ];
+
+    updateSelectedOption('');
 
     console.log(31, ActiveSessionManager.getActiveSession().userCallHistory);
 
@@ -77,13 +82,15 @@ const MainToolsView = (props) => {
     const prefilledReason: string =
       prefilledResponses[event.target.value].filled_reason;
 
+    updateSelectedOption(event.target.value);
+
     updateDisplay({
       ...displayFields,
       callerReason: prefilledReason,
     });
   };
 
-  const options = prefilledResponses.map((value, index) => {
+  const options = prefilledResponses.map((value, index: number) => {
     return (
       <option key={index} value={index}>
         {value.option}
@@ -245,6 +252,7 @@ const MainToolsView = (props) => {
               name="prefilled-options"
               id="prefilled_options"
               onChange={populateTextAreaWithPrefilledOptions}
+              value={selectedOption}
             >
               {options}
             </select>
