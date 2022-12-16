@@ -1,4 +1,5 @@
 interface DisplayObject {
+  index: number;
   mid: string;
   dba: string;
   sv: string;
