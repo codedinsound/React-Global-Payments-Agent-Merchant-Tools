@@ -14,7 +14,7 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
-  // MARK:
+  // MARK: If Call was populated from historical call history or is a new record after clearing. 
   const [toggleSubmitOrToggle, updateSubmitOrToggle] = useState(true);
 
   // MARK: Selected PreWritten Response
@@ -23,6 +23,7 @@ const MainToolsView = (props) => {
   // MARK: Radio Buttons State
   const [selected, setSelected] = useState('DBA Confirmed');
 
+  // MARK: Submit Handler after submitting the form. 
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
