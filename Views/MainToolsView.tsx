@@ -35,7 +35,6 @@ const MainToolsView = (props) => {
     updateDisplay(Utils.generateNewDisplayFieldObject());
 
     // Create new Record or Update
-
     if (displayFields.index > -1) {
       console.log('Already Exists in database');
     } else {
