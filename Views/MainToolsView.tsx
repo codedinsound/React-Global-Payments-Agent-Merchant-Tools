@@ -55,7 +55,6 @@ const MainToolsView = (props) => {
     };
 
     if (field === 'sv') {
-      console.log(event.target.value);
       setSelected(event.target.value);
     }
 
@@ -63,14 +62,17 @@ const MainToolsView = (props) => {
     updateDisplay(newObj);
   };
 
+  // Copies MID to the Clip Board
   const copyMIDToClipBoard = () => {
     navigator.clipboard.writeText(displayFields.mid);
   };
 
+  // MARK: Clears all Input Fields
   const clearFields = () => {
     updateDisplay(Utils.generateNewDisplayFieldObject());
   };
 
+  // MARK: Clears Input MID Field
   const clearMID = () => {
     updateDisplay({
       ...displayFields,
@@ -78,17 +80,22 @@ const MainToolsView = (props) => {
     });
   };
 
+  // MARK: Update Display Field with Prefilled Options
   const populateTextAreaWithPrefilledOptions = (event) => {
     const prefilledReason: string =
       prefilledResponses[event.target.value].filled_reason;
 
     updateSelectedOption(event.target.value);
 
+    console.log(event.target.value);
+
     updateDisplay({
       ...displayFields,
       callerReason: prefilledReason,
     });
   };
+
+  // MARK: Populate Input Fields with Historical Call Data 
 
   const options = prefilledResponses.map((value, index: number) => {
     return (
@@ -264,7 +271,9 @@ const MainToolsView = (props) => {
               name="history_options"
               id="history_options"
               onChange={(event) => {
+                // TODO: Work on this section of code and add logic in order to
                 const field = event.target.value;
+                console.log(field);
                 updateDisplay(merchantHistory[field]);
               }}
             >
