@@ -95,7 +95,13 @@ const MainToolsView = (props) => {
     });
   };
 
-  // MARK: Populate Input Fields with Historical Call Data 
+  // MARK: Populate Input Fields with Historical Call Data
+  const populateInputFieldsWithHistoricalData = (event) => {
+    // TODO: Work on this section of code and add logic in order to
+    const field = event.target.value;
+    console.log(field);
+    updateDisplay(merchantHistory[field]);
+  };
 
   const options = prefilledResponses.map((value, index: number) => {
     return (
@@ -270,12 +276,7 @@ const MainToolsView = (props) => {
               size={15}
               name="history_options"
               id="history_options"
-              onChange={(event) => {
-                // TODO: Work on this section of code and add logic in order to
-                const field = event.target.value;
-                console.log(field);
-                updateDisplay(merchantHistory[field]);
-              }}
+              onChange={populateInputFieldsWithHistoricalData}
             >
               {historyOptions}
             </select>
