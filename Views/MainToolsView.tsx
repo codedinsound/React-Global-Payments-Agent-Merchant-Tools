@@ -14,6 +14,9 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
+  // MARK:
+  const [toggleSubmitOrToggle, updateSubmitOrToggle] = useState(true);
+
   // MARK: Selected PreWritten Response
   const [selectedOption, updateSelectedOption] = useState('');
 
@@ -23,20 +26,31 @@ const MainToolsView = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
+
+    // Copy onto the clipboard
     navigator.clipboard.writeText(output);
+
+    // Clear the Updated Top Display
     updateDisplay(Utils.generateNewDisplayFieldObject());
-    merchantHistory.push(displayFields);
-    updateMerchantHistory([...merchantHistory]);
 
+    // Create new Record or Update
+
+    if (displayFields.index > -1) {
+      console.log('Already Exists in database');
+    } else {
+      merchantHistory.push(displayFields);
+      displayFields.index = merchantHistory.length - 1;
+      updateMerchantHistory([...merchantHistory]);
+    }
+
+    // Reset Input Parameters.
     setSelected('DBA Confirmed');
+    updateSelectedOption('');
 
+    // Active Session Manager Store
     ActiveSessionManager.getActiveSession().userCallHistory = [
       ...merchantHistory,
     ];
-
-    updateSelectedOption('');
-
-    console.log(31, ActiveSessionManager.getActiveSession().userCallHistory);
 
     ActiveSessionManager.updateActiveUserCallHistoryInLocalStore();
   };
@@ -97,7 +111,6 @@ const MainToolsView = (props) => {
 
   // MARK: Populate Input Fields with Historical Call Data
   const populateInputFieldsWithHistoricalData = (event) => {
-    // TODO: Work on this section of code and add logic in order to
     const field = event.target.value;
     console.log(field);
     updateDisplay(merchantHistory[field]);
