@@ -14,7 +14,7 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
-  // MARK: If Call was populated from historical call history or is a new record after clearing. 
+  // MARK: If Call was populated from historical call history or is a new record after clearing.
   const [toggleSubmitOrToggle, updateSubmitOrToggle] = useState(true);
 
   // MARK: Selected PreWritten Response
@@ -23,10 +23,15 @@ const MainToolsView = (props) => {
   // MARK: Radio Buttons State
   const [selected, setSelected] = useState('DBA Confirmed');
 
-  // MARK: Submit Handler after submitting the form. 
+  // MARK: Create Output for Export of all Fields
+  const exportOutput = (): string => {
+    return `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
+  };
+
+  // MARK: Submit Handler after submitting the form.
   const submitHandler = (event) => {
     event.preventDefault();
-    const output = `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
+    const output = exportOutput();
 
     // Copy onto the clipboard
     navigator.clipboard.writeText(output);
@@ -55,6 +60,7 @@ const MainToolsView = (props) => {
     ActiveSessionManager.updateActiveUserCallHistoryInLocalStore();
   };
 
+  // MARK: Handles any input field changes. 
   const handleChange = (event) => {
     const field: string = event.target.id;
 
@@ -76,6 +82,68 @@ const MainToolsView = (props) => {
     updateDisplay(newObj);
   };
 
+  // MARK: Update Display Field with Prefilled Options
+  const populateTextAreaWithPrefilledOptions = (event) => {
+    let prefilledReason: string =
+      prefilledResponses[event.target.value].filled_reason;
+
+    if (+event.target.value >= prefilledResponses.length - 2) {
+      const date = new Date();
+      const formattedDate = `${
+        date.getMonth() + 1
+      }-${date.getDate()}-${date.getFullYear()}`;
+
+      prefilledReason += formattedDate;
+    }
+
+    updateSelectedOption(event.target.value);
+
+    updateDisplay({
+      ...displayFields,
+      callerReason: prefilledReason,
+    });
+  };
+
+  // MARK: Populate Input Fields with Historical Call Data
+  const populateInputFieldsWithHistoricalData = (event) => {
+    const field = event.target.value;
+    console.log(field);
+    updateDisplay(merchantHistory[field]);
+  };
+
+  // MARK: Populate Options
+  const options = prefilledResponses.map((value, index: number) => {
+    return (
+      <option key={index} value={index}>
+        {value.option}
+      </option>
+    );
+  });
+
+  // MARK: Populate Historical Options
+  const historyOptions = merchantHistory.map((merchant, index) => {
+    return (
+      <option key={index} value={index}>
+        {merchant.mid + ' - ' + merchant.dba}
+      </option>
+    );
+  });
+
+  // MARK: Copy DBA to Clip Board
+  const copyDBAToClipboard = () => {
+    navigator.clipboard.writeText(displayFields.dba);
+  };
+
+  // MARK: Copy Reason to Clip Board
+  const copyReasonToClipboard = () => {
+    navigator.clipboard.writeText(displayFields.callerReason);
+  };
+
+  // MARK: Copy All Form Fields to the clip board
+  const copyAllFormFieldsToClipboard = (): void => {
+    navigator.clipboard.writeText(exportOutput());
+  };
+
   // Copies MID to the Clip Board
   const copyMIDToClipBoard = () => {
     navigator.clipboard.writeText(displayFields.mid);
@@ -94,52 +162,7 @@ const MainToolsView = (props) => {
     });
   };
 
-  // MARK: Update Display Field with Prefilled Options
-  const populateTextAreaWithPrefilledOptions = (event) => {
-    const prefilledReason: string =
-      prefilledResponses[event.target.value].filled_reason;
-
-    updateSelectedOption(event.target.value);
-
-    console.log(event.target.value);
-
-    updateDisplay({
-      ...displayFields,
-      callerReason: prefilledReason,
-    });
-  };
-
-  // MARK: Populate Input Fields with Historical Call Data
-  const populateInputFieldsWithHistoricalData = (event) => {
-    const field = event.target.value;
-    console.log(field);
-    updateDisplay(merchantHistory[field]);
-  };
-
-  const options = prefilledResponses.map((value, index: number) => {
-    return (
-      <option key={index} value={index}>
-        {value.option}
-      </option>
-    );
-  });
-
-  const historyOptions = merchantHistory.map((merchant, index) => {
-    return (
-      <option key={index} value={index}>
-        {merchant.mid + ' - ' + merchant.dba}
-      </option>
-    );
-  });
-
-  const copyDBAToClipboard = () => {
-    navigator.clipboard.writeText(displayFields.dba);
-  };
-
-  const copyReasonToClipboard = () => {
-    navigator.clipboard.writeText(displayFields.callerReason);
-  };
-
+  // MARK: Gets the active session userName.
   let userName = ActiveSessionManager.getActiveSession().userName;
 
   return (
@@ -316,6 +339,9 @@ const MainToolsView = (props) => {
           <button onClick={copyMIDToClipBoard}>Copy MID</button>
           <button onClick={copyDBAToClipboard}>Copy DBA</button>
           <button onClick={copyReasonToClipboard}>Copy Reason</button>
+          <button onClick={copyAllFormFieldsToClipboard}>
+            Copy All Fields
+          </button>
           <div className="btn-controls-divider"></div>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>

@@ -1,6 +1,6 @@
 const prefilledResponses = [
   {
-    option: '',
+    option: 'Choose a Response',
     filled_reason: '',
   },
   {
@@ -20,14 +20,13 @@ const prefilledResponses = [
     filled_reason: 'Needed transaction express user unlock',
   },
   {
-    option: 'Credit Cards for Tip Adjust',
-    filled_reason:
-      'Needs credit cards in order to do tip adjustments. For the date: ',
+    option: 'TXP MFA Reset',
+    filled_reason: 'Merchant needed MFA reset on their TXP account.',
   },
   {
-    option: 'Credit Cards for Transaction Adjust',
+    option: 'TC Password Retrieval',
     filled_reason:
-      'Merchant needed credit cards for transaction adjustment for the dates: ',
+      'Merchant needed help retrieving their transaction central password.',
   },
   {
     option: 'Duplicate Batch',
@@ -52,6 +51,16 @@ const prefilledResponses = [
     option: 'Confirm Transaction',
     filled_reason:
       'Needs credit card confirmation to see if the transaction ran through. For the date:',
+  },
+  {
+    option: 'Credit Cards for Tip Adjust',
+    filled_reason:
+      'Needs credit cards in order to do tip adjustments. For the dates: ',
+  },
+  {
+    option: 'Credit Cards for Transaction Adjust',
+    filled_reason:
+      'Merchant needed credit cards for transaction adjustment for the dates: ',
   },
 ];
 
