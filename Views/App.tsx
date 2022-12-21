@@ -30,7 +30,7 @@ const Protected = ({ children }) => {
   return children;
 };
 
-export default function App(props) {
+export default function App() {
   // Check if There is an Active Session
 
   ActiveSessionManager.restablishSession();
@@ -40,8 +40,6 @@ export default function App(props) {
       ? ActiveSessionManager.getActiveSession()
       : null
   );
-
-  console.log(sessionToken);
 
   // FUNCTION
   const loginIntoToolsHandler = (credentials: Credentials) => {

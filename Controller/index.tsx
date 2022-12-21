@@ -1,4 +1,5 @@
 import ActiveSessionManager from './ActiveSessionManager';
+import ExcelManager from './ExcelManager';
 
 import {
   Server,
@@ -7,6 +8,7 @@ import {
 } from './ServerManager';
 
 export {
+  ExcelManager,
   Server,
   LocalStorageSimulationServer,
   ServerManagerController,

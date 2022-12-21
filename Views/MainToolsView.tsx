@@ -14,7 +14,7 @@ const MainToolsView = (props) => {
     Utils.generateNewDisplayFieldObject()
   );
 
-  // MARK: If Call was populated from historical call history or is a new record after clearing.
+  // MARK: If Call was populated from historical call history or is a new record after clearing. // TODO: <-----------------------------------------------
   const [toggleSubmitOrToggle, updateSubmitOrToggle] = useState(true);
 
   // MARK: Selected PreWritten Response
@@ -39,7 +39,7 @@ const MainToolsView = (props) => {
     // Clear the Updated Top Display
     updateDisplay(Utils.generateNewDisplayFieldObject());
 
-    // Create new Record or Update
+    // MARK: Create new Record or Update
     if (displayFields.index > -1) {
       console.log('Already Exists in database');
     } else {
@@ -48,7 +48,7 @@ const MainToolsView = (props) => {
       updateMerchantHistory([...merchantHistory]);
     }
 
-    // Reset Input Parameters.
+    // MARK: Reset Input Parameters.
     setSelected('DBA Confirmed');
     updateSelectedOption('');
 
