@@ -6,7 +6,7 @@ class ExcelManager {
   };
 
   // MARK: Create an Excel Sheet Report form Historical Data
-  static createNewExcelSheetReport(): void {
+  static createNewExcelSheetReport(data): void {
     var workbook = XLSX.utils.book_new();
 
     const structure = [['', '', '', '', '']];

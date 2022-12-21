@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Clock from 'react-live-clock';
-import { ActiveSessionManager } from '../Controller';
+import { ActiveSessionManager, ExcelManager } from '../Controller';
 import { prefilledResponses } from '../Model';
 import Utils from '../Utils';
 
@@ -60,7 +60,7 @@ const MainToolsView = (props) => {
     ActiveSessionManager.updateActiveUserCallHistoryInLocalStore();
   };
 
-  // MARK: Handles any input field changes. 
+  // MARK: Handles any input field changes.
   const handleChange = (event) => {
     const field: string = event.target.id;
 
@@ -164,6 +164,15 @@ const MainToolsView = (props) => {
 
   // MARK: Gets the active session userName.
   let userName = ActiveSessionManager.getActiveSession().userName;
+
+  // ==========================================================================
+  // MARK: TEST NEW FEATURED FUNCTIONS HERE BELOW
+  // ==========================================================================
+  const testNewFeatures = (): void => {
+    console.log('Testing new features button');
+
+    ExcelManager.createNewExcelSheetReport(props.userCallHistory);
+  };
 
   return (
     <div>
@@ -345,6 +354,7 @@ const MainToolsView = (props) => {
           <div className="btn-controls-divider"></div>
           <button onClick={clearMID}>Clear MID</button>
           <button onClick={clearFields}>Clear All Fields</button>
+          <button onClick={testNewFeatures}>Testing</button>
         </div>
       </div>
       <section className="footer"></section>

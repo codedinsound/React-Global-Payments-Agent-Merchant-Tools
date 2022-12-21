@@ -41,7 +41,7 @@ export default function App() {
       : null
   );
 
-  // FUNCTION
+  // MARK: Login into Application Handler 
   const loginIntoToolsHandler = (credentials: Credentials) => {
     server.getServer().authenticateUser(credentials);
 
