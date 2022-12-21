@@ -9,7 +9,7 @@ class ExcelManager {
   static createNewExcelSheetReport(data): void {
     // var workbook = XLSX.utils.book_new();
 
-    const structure = [['', '', '', '', '']];
+    // const structure = [['', '', '', '', '']];
 
     // var worksheet = XLSX.utils.aoa_to_sheet([
     //   ["A1", "B1", "C1"],
@@ -21,7 +21,7 @@ class ExcelManager {
 
     // XLSX.writeFileXLSX(workbook, filename, opts);
 
-    console.log(structure);
+    //console.log(structure);
   }
 }
 
