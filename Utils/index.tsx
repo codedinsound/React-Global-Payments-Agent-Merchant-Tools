@@ -14,6 +14,12 @@ class Utils {
 
     return obj;
   }
+
+  // Gets Todays Date
+  static getTodaysDate(): string {
+    const date = new Date();
+    return `${date.getMonth()}-${date.getDay()}-${date.getFullYear()}`;
+  }
 }
 
 export default Utils;
