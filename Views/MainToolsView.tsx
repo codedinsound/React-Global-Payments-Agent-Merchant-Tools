@@ -38,7 +38,7 @@ const MainToolsView = (props) => {
     // Clear the Updated Top Display
     updateDisplay(Utils.generateNewDisplayFieldObject());
 
-    // MARK: Create new Record or Update
+    // Create new Record or Update
     if (displayFields.index > -1) {
       console.log('Already Exists in database');
     } else {
@@ -46,6 +46,9 @@ const MainToolsView = (props) => {
       displayFields.index = merchantHistory.length - 1;
       updateMerchantHistory([...merchantHistory]);
     }
+
+    // Update Excel Sheet
+    props.updateExcelHandler(displayFields);
 
     // MARK: Reset Input Parameters.
     setSelected('DBA Confirmed');

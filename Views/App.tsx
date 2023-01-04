@@ -65,6 +65,31 @@ export default function App() {
     updateSessionToken(null);
   };
 
+  // MARK: Update Excel Sheet Handler
+  const updateExcelHandler = (newField) => {
+    // return `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
+    // 'Merchant ID',
+    // 'DBA',
+    // 'SV',
+    // 'Caller Name',
+    // 'Caller Title',
+    // 'Caller Reason',
+    const newEntry = [
+      newField.callerName,
+      newField.dba,
+      newField.sv,
+      newField.callerName,
+      newField.callerTitle,
+      newField.callerReason,
+    ];
+
+    excelState.push(newEntry);
+
+    updateExcelState(excelState);
+
+    console.log(excelState);
+  };
+
   return (
     <React.Fragment>
       <Router>
@@ -83,6 +108,7 @@ export default function App() {
                   userCallHistory={
                     sessionToken !== null ? sessionToken.userCallHistory : null
                   }
+                  updateExcelHandler={updateExcelHandler}
                   logOutOfToolsHandler={logOutOfToolsHandler}
                 />
               </Protected>
