@@ -13,6 +13,7 @@ import {
 import './style.css';
 import {
   ActiveSessionManager,
+  ExcelManager,
   LocalStorageSimulationServer,
   ServerManagerController,
 } from '../Controller';
@@ -40,7 +41,9 @@ export default function App() {
       : null
   );
 
-  const [excelState, updateExcelState] = useState([]);
+  const [excelState, updateExcelState] = useState(
+    ExcelManager.generateNewExcelLayout()
+  );
 
   console.log(excelState);
 
