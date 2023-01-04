@@ -46,7 +46,7 @@ export default function App() {
   const [excelState, updateExcelState] = useState(
     ActiveSessionManager.isSessionAlive()
       ? ActiveSessionManager.getActiveSession().userWorkSheetStore
-      : null
+      : ExcelManager.generateNewExcelLayout()
   );
 
   console.log(excelState);
