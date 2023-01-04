@@ -41,11 +41,11 @@ export default function App() {
       : null
   );
 
-  const [excelState, updateExcelState] = useState(
-    ExcelManager.generateNewExcelLayout()
-  );
+  // const [excelState, updateExcelState] = useState(
+  //   ExcelManager.generateNewExcelLayout()
+  // );
 
-  console.log(excelState);
+  // console.log(excelState);
 
   // MARK: Login into Application Handler
   const loginIntoToolsHandler = (credentials: Credentials) => {
