@@ -35,14 +35,18 @@ export default function App() {
   // Check if There is an Active Session
   ActiveSessionManager.restablishSession();
 
+  // MARK: Handle Session Token
   const [sessionToken, updateSessionToken] = useState(
     ActiveSessionManager.isSessionAlive()
       ? ActiveSessionManager.getActiveSession()
       : null
   );
 
+  // MARK: Handle Workbook Excel Sheet State
   const [excelState, updateExcelState] = useState(
-    ExcelManager.generateNewExcelLayout()
+    ActiveSessionManager.isSessionAlive()
+      ? ActiveSessionManager.getActiveSession().userWorkSheetStore
+      : null
   );
 
   console.log(excelState);
@@ -75,7 +79,7 @@ export default function App() {
     // 'Caller Title',
     // 'Caller Reason',
     const newEntry = [
-      newField.callerName,
+      newField.mid,
       newField.dba,
       newField.sv,
       newField.callerName,

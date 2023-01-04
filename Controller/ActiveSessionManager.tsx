@@ -1,3 +1,4 @@
+import { ExcelManager } from '../Controller';
 import { Session } from '../Model';
 
 class ActiveSessionManager {
@@ -10,6 +11,7 @@ class ActiveSessionManager {
       userHash,
       userName,
       userCallHistory: [],
+      userWorkSheetStore: ExcelManager.generateNewExcelLayout(),
     };
 
     localStorage.setItem(
