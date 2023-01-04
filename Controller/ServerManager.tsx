@@ -11,6 +11,7 @@ interface Server extends Authenticate {
   disconnect(): void;
 }
 
+// Users Interface
 interface Users {
   [key: string]: string;
 }
@@ -71,7 +72,6 @@ class LocalStorageSimulationServer implements Authenticate {
 }
 
 // MARK: External API Server
-
 class ServerManagerController {
   private server: Server;
 

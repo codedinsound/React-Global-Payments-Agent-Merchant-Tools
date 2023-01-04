@@ -33,7 +33,6 @@ const MainToolsView = (props) => {
     event.preventDefault();
     const output = exportOutput();
 
-    // Copy onto the clipboard
     navigator.clipboard.writeText(output);
 
     // Clear the Updated Top Display

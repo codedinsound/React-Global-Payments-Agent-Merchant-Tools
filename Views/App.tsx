@@ -32,7 +32,6 @@ const Protected = ({ children }) => {
 
 export default function App() {
   // Check if There is an Active Session
-
   ActiveSessionManager.restablishSession();
 
   const [sessionToken, updateSessionToken] = useState(
@@ -41,7 +40,11 @@ export default function App() {
       : null
   );
 
-  // MARK: Login into Application Handler 
+  const [excelState, updateExcelState] = useState([]);
+
+  console.log(excelState);
+
+  // MARK: Login into Application Handler
   const loginIntoToolsHandler = (credentials: Credentials) => {
     server.getServer().authenticateUser(credentials);
 
