@@ -35,10 +35,8 @@ const MainToolsView = (props) => {
 
     navigator.clipboard.writeText(output);
 
-    // Clear the Updated Top Display
     updateDisplay(Utils.generateNewDisplayFieldObject());
 
-    // Create new Record or Update
     if (displayFields.index > -1) {
       console.log('Already Exists in database');
     } else {
@@ -47,14 +45,11 @@ const MainToolsView = (props) => {
       updateMerchantHistory([...merchantHistory]);
     }
 
-    // Update Excel Sheet
     props.updateExcelHandler(displayFields);
 
-    // MARK: Reset Input Parameters.
     setSelected('DBA Confirmed');
     updateSelectedOption('');
 
-    // Active Session Manager Store
     ActiveSessionManager.getActiveSession().userCallHistory = [
       ...merchantHistory,
     ];
@@ -173,7 +168,6 @@ const MainToolsView = (props) => {
   const testNewFeatures = (): void => {
     console.log('Testing new features button');
 
-    ExcelManager.createNewExcelSheetReport(props.userCallHistory);
   };
 
   return (

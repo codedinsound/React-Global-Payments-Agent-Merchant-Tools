@@ -51,11 +51,15 @@ class ActiveSessionManager {
 
   // MARK: Logout and end Active Session.
   static endActiveSession(): void {
+
+    console.log(this.activeSession); 
+
     this.activeSession = {
       isSessionAlive: false,
       userHash: '',
       userName: '',
       userCallHistory: [],
+      userWorkSheetStore: ExcelManager.generateNewExcelLayout()
     };
 
     localStorage.setItem(

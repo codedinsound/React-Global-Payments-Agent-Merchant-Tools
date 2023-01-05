@@ -1,4 +1,5 @@
 import XLSX from 'xlsx';
+import Utils from '../Utils';
 
 class ExcelManager {
   static options = {
@@ -6,20 +7,19 @@ class ExcelManager {
   };
 
   // MARK: Create an Excel Sheet Report form Historical Data
-  static createNewExcelSheetReport(data): void {
-    var workbook = XLSX.utils.book_new();
+  static generateNewExcelSheetAfterLoggingOut(data): void {
+    const workbook = XLSX.utils.book_new();
 
-    // var worksheet = XLSX.utils.aoa_to_sheet([
-    //   ["A1", "B1", "C1"],
-    //   ["A2", "B2", "C2"],
-    //   ["A3", "B3", "C3"]
-    // ]);
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
 
-    // XLSX.utils.book_append_sheet(workbook, worksheet, sheet_name);
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      Utils.getTodaysDate(),
+      true
+    );
 
-    // XLSX.writeFileXLSX(workbook, filename, opts);
-
-    //console.log(structure);
+    XLSX.writeFileXLSX(workbook, `${Utils.getTodaysDate()}.xlsx`, this.options);
   }
 
   static generateNewExcelLayout(): string[][] {

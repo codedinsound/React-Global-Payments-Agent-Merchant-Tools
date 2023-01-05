@@ -18,7 +18,7 @@ class Utils {
   // Gets Todays Date
   static getTodaysDate(): string {
     const date = new Date();
-    return `${date.getMonth()}-${date.getDay()}-${date.getFullYear()}`;
+    return `${date.getMonth() + 1}-${date.getDay()}-${date.getFullYear()}`;
   }
 }
 

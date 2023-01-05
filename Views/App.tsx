@@ -18,6 +18,7 @@ import {
   ServerManagerController,
 } from '../Controller';
 import { Credentials } from '../Model';
+import Utils from '../Utils';
 
 // ESTABLISH SERVER CONNECTION
 // ----------------------------------------------------
@@ -34,6 +35,8 @@ const Protected = ({ children }) => {
 export default function App() {
   // Check if There is an Active Session
   ActiveSessionManager.restablishSession();
+
+  console.log(Utils.getTodaysDate());
 
   // MARK: Handle Session Token
   const [sessionToken, updateSessionToken] = useState(
@@ -64,6 +67,9 @@ export default function App() {
 
   // MARK: Log Out of the Screen
   const logOutOfToolsHandler = (e) => {
+    ExcelManager.generateNewExcelSheetAfterLoggingOut(excelState);
+
+    updateExcelState(ExcelManager.generateNewExcelLayout());
     console.log('Logging Out....');
     ActiveSessionManager.endActiveSession();
     updateSessionToken(null);
