@@ -33,11 +33,11 @@ const LoginForm = ({ loginIntoToolsHandler }) => {
         <h1>Login</h1>
         <div className="login-fields">
           <label>Username:</label>
-          <input type="text" id="username" readOnly value="lsantander.ntl" />
+          <input type="text" id="username" />
         </div>
         <div className="login-fields">
           <label>Password: </label>
-          <input type="password" id="password" readOnly value="123456A" />
+          <input type="password" id="password" />
         </div>
         <div className="login-fields-button">
           <button>Log In</button>
