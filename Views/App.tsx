@@ -36,8 +36,6 @@ export default function App() {
   // Check if There is an Active Session
   ActiveSessionManager.restablishSession();
 
-  console.log(Utils.getTodaysDate());
-
   // MARK: Handle Session Token
   const [sessionToken, updateSessionToken] = useState(
     ActiveSessionManager.isSessionAlive()
@@ -52,8 +50,6 @@ export default function App() {
       : ExcelManager.generateNewExcelLayout()
   );
 
-  console.log(excelState);
-
   // MARK: Login into Application Handler
   const loginIntoToolsHandler = (credentials: Credentials) => {
     server.getServer().authenticateUser(credentials);
@@ -65,25 +61,18 @@ export default function App() {
     return true;
   };
 
-  // MARK: Log Out of the Screen
+  // MARK: Log Out of the Screen and Clear All Client Data From Browser State
   const logOutOfToolsHandler = (e) => {
     ExcelManager.generateNewExcelSheetAfterLoggingOut(excelState);
 
     updateExcelState(ExcelManager.generateNewExcelLayout());
-    console.log('Logging Out....');
-    ActiveSessionManager.endActiveSession();
     updateSessionToken(null);
+
+    ActiveSessionManager.endActiveSession();
   };
 
   // MARK: Update Excel Sheet Handler
   const updateExcelHandler = (newField) => {
-    // return `Caller Name: ${displayFields.callerName}\nTitle: ${displayFields.callerTitle}\nSecondary Verification: ${displayFields.sv}\nReason: ${displayFields.callerReason} - no FQA.`;
-    // 'Merchant ID',
-    // 'DBA',
-    // 'SV',
-    // 'Caller Name',
-    // 'Caller Title',
-    // 'Caller Reason',
     const newEntry = [
       newField.mid,
       newField.dba,
@@ -94,10 +83,7 @@ export default function App() {
     ];
 
     excelState.push(newEntry);
-
     updateExcelState(excelState);
-
-    console.log(excelState);
   };
 
   return (

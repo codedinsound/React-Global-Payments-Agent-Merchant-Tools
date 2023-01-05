@@ -85,16 +85,10 @@ const MainToolsView = (props) => {
       prefilledResponses[event.target.value].filled_reason;
 
     if (+event.target.value >= prefilledResponses.length - 2) {
-      const date = new Date();
-      const formattedDate = `${
-        date.getMonth() + 1
-      }-${date.getDate()}-${date.getFullYear()}`;
-
-      prefilledReason += formattedDate;
+      prefilledReason += Utils.getTodaysDate();
     }
 
     updateSelectedOption(event.target.value);
-
     updateDisplay({
       ...displayFields,
       callerReason: prefilledReason,
@@ -104,7 +98,6 @@ const MainToolsView = (props) => {
   // MARK: Populate Input Fields with Historical Call Data
   const populateInputFieldsWithHistoricalData = (event) => {
     const field = event.target.value;
-    console.log(field);
     updateDisplay(merchantHistory[field]);
   };
 
@@ -167,7 +160,6 @@ const MainToolsView = (props) => {
   // ==========================================================================
   const testNewFeatures = (): void => {
     console.log('Testing new features button');
-
   };
 
   return (

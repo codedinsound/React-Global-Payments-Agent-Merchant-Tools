@@ -1,8 +1,9 @@
 import { DisplayObject } from '../Model';
 
 class Utils {
-  static generateNewDisplayFieldObject() {
-    const obj: DisplayObject = {
+  // Generates a New display Object
+  static generateNewDisplayFieldObject(): DisplayObject {
+    return {
       index: -1,
       mid: '',
       dba: '',
@@ -11,8 +12,6 @@ class Utils {
       callerTitle: '',
       callerReason: '',
     };
-
-    return obj;
   }
 
   // Gets Todays Date

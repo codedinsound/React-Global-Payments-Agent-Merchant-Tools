@@ -38,6 +38,7 @@ class LocalStorageSimulationServer implements Authenticate {
     }
   }
 
+  // MARK: Disconnects from Local Storage Server Test Instance
   disconnect(): void {
     console.log('disconnecting from local storage server');
     delete this.database;

@@ -22,6 +22,7 @@ class ExcelManager {
     XLSX.writeFileXLSX(workbook, `${Utils.getTodaysDate()}.xlsx`, this.options);
   }
 
+  // MARK: Generates a Excel Sheet Layout for State
   static generateNewExcelLayout(): string[][] {
     let worksheet: string[][] = [
       [
