@@ -18,8 +18,6 @@ const LoginForm = ({ loginIntoToolsHandler }) => {
 
     const navigateNext = loginIntoToolsHandler(credentials);
 
-    console.log(22, navigateNext);
-
     if (navigateNext) {
       navigate('/tools');
     } else {
