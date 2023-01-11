@@ -1,7 +1,7 @@
 import { DisplayObject } from '../Model';
 
 class Utils {
-  // Generates a New display Object
+  // MARK: Generates a New display Object
   static generateNewDisplayFieldObject(): DisplayObject {
     return {
       index: -1,
@@ -14,10 +14,10 @@ class Utils {
     };
   }
 
-  // Gets Todays Date
+  // MARK: Gets Todays Date
   static getTodaysDate(): string {
     const date = new Date();
-    return `${date.getMonth() + 1}-${date.getDay()}-${date.getFullYear()}`;
+    return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
   }
 }
 

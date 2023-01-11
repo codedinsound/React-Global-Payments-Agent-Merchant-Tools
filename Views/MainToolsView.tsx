@@ -39,6 +39,9 @@ const MainToolsView = (props) => {
 
     if (displayFields.index > -1) {
       console.log('Already Exists in database');
+
+      merchantHistory[displayFields.index] = displayFields;
+      updateMerchantHistory([...merchantHistory]);
     } else {
       merchantHistory.push(displayFields);
       displayFields.index = merchantHistory.length - 1;
@@ -99,6 +102,7 @@ const MainToolsView = (props) => {
   const populateInputFieldsWithHistoricalData = (event) => {
     const field = event.target.value;
     updateDisplay(merchantHistory[field]);
+    console.log(displayFields);
   };
 
   // MARK: Populate Options
@@ -160,6 +164,8 @@ const MainToolsView = (props) => {
   // ==========================================================================
   const testNewFeatures = (): void => {
     console.log('Testing new features button');
+
+    console.log(merchantHistory);
   };
 
   return (

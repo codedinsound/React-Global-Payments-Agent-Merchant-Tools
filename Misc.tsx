@@ -37,3 +37,6 @@
 //     // const bytes = AES.decrypt(cipher, payload.password);
 //   }
 // }
+
+// package.json
+// "test": "react-scripts test --env=jsdom",

@@ -73,6 +73,8 @@ export default function App() {
 
   // MARK: Update Excel Sheet Handler
   const updateExcelHandler = (newField) => {
+    console.log('update excel', newField);
+
     const newEntry = [
       newField.mid,
       newField.dba,
@@ -82,7 +84,9 @@ export default function App() {
       newField.callerReason,
     ];
 
-    excelState.push(newEntry);
+    if (newField.index > -1) excelState[newField.index] = newEntry;
+    else excelState.push(newEntry);
+
     updateExcelState(excelState);
   };
 
